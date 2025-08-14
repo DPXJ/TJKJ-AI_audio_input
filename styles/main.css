@@ -1269,6 +1269,38 @@ body {
     flex: 1;
 }
 
+/* 事后拍照入口样式 */
+.after-photo-entry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 4px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.after-photo-entry:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.after-photo-entry i {
+    font-size: 14px;
+    color: #ffd700;
+}
+
+.after-photo-entry span {
+    color: white;
+    font-weight: 500;
+}
+
 .activity-status {
     position: absolute;
     top: 15px;

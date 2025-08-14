@@ -1664,6 +1664,12 @@ const pageData = {
                                     <span class="detail-label">负责人:</span>
                                     <span class="detail-value">王成龙</span>
                                 </div>
+                                <div class="detail-item">
+                                    <div class="after-photo-entry">
+                                        <i class="fas fa-camera"></i>
+                                        <span>事后拍照</span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="activity-status completed">
                                 <div class="status-stamp">已完成</div>
