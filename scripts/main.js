@@ -63,7 +63,7 @@ const pageData = {
                         <div class="section-title">数字大田</div>
                         <div class="feature-grid">
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-seedling"></i></div><div class="fi-text">种植计划</div></div>
-                            <div class="feature-item"><div class="fi-icon"><i class="fas fa-calendar-alt"></i></div><div class="fi-text">农事日历</div></div>
+                            <div class="feature-item clickable" onclick="loadPage('farmCalendar')"><div class="fi-icon"><i class="fas fa-calendar-alt"></i></div><div class="fi-text">农事日历</div></div>
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-bug"></i></div><div class="fi-text">病虫害识别</div></div>
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-user-md"></i></div><div class="fi-text">专家诊断</div></div>
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-warehouse"></i></div><div class="fi-text">投入品管理</div></div>
@@ -72,7 +72,7 @@ const pageData = {
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-stamp"></i></div><div class="fi-text">农事审批</div></div>
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-receipt"></i></div><div class="fi-text">我的领用</div></div>
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-bug"></i></div><div class="fi-text">病虫害识别</div></div>
-                            <div class="feature-item" onclick="loadPage('fieldWorkstation')"><div class="fi-icon"><i class="fas fa-microchip"></i></div><div class="fi-text">田间工作站</div></div>
+                            <div class="feature-item clickable" onclick="loadPage('fieldWorkstation')"><div class="fi-icon"><i class="fas fa-microchip"></i></div><div class="fi-text">田间工作站</div></div>
                             <div class="feature-item disabled"><div class="fi-icon"><i class="fas fa-ellipsis-h"></i></div><div class="fi-text">更多</div></div>
                             </div>
                             </div>
@@ -841,6 +841,7 @@ const pageData = {
         content: `
             <div class="mobile-page aiServiceEffect-page">
                 <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
                     <h1>AI服务成效</h1>
                     <div class="subtitle">AI技术驱动的农事服务效果分析</div>
                 </div>
@@ -1587,9 +1588,16 @@ const pageData = {
                                     <button class="btn btn-small">查看</button>
                                 </div>
                             </div>
-                            <div class="monitoring-item">
+                            <div class="monitoring-item ai-service-item" onclick="loadPage('aiServiceEffect')">
                                 <div class="monitoring-content">
-                                    <span>经AI技术对比分析,整体效果提升: <span class="effect-highlight">90%</span></span>
+                                    <div class="ai-service-content">
+                                        <i class="fas fa-brain ai-service-icon"></i>
+                                        <span>经AI技术对比分析,整体效果提升: <span class="effect-highlight">90%</span></span>
+                                        <div class="ai-service-entry">
+                                            <span class="ai-entry-text">查看AI服务成效</span>
+                                            <i class="fas fa-arrow-right"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

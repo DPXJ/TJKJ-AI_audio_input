@@ -627,12 +627,39 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
-.feature-item { text-align: center; }
+.feature-item { 
+    text-align: center; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+}
 .feature-item.disabled { opacity: 0.6; }
+
+/* 可点击的feature-item样式 */
+.feature-item.clickable {
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.feature-item.clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(10, 160, 110, 0.2);
+}
+
+.feature-item.clickable:hover .fi-icon {
+    background: linear-gradient(135deg, #28a745, #0aa06e);
+    transform: scale(1.1);
+}
+
+.feature-item.clickable:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(10, 160, 110, 0.3);
+}
 .fi-icon {
     width: 36px; height: 36px; border-radius: 8px; margin: 0 auto 4px;
     background: linear-gradient(135deg, #21c08b, #0aa06e);
     color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px;
+    transition: all 0.2s ease;
 }
 .fi-text { font-size: 9px; color: #333; }
 
@@ -1487,6 +1514,81 @@ body {
     border-radius: 8px;
     font-size: 14px;
     color: #333;
+}
+
+/* AI服务成效入口样式 */
+.ai-service-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin: 8px 0;
+}
+
+.ai-service-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.ai-service-item .monitoring-content {
+    padding: 12px;
+    background: transparent;
+}
+
+.ai-service-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ai-service-icon {
+    font-size: 18px;
+    color: #ffd700;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+.ai-service-content span {
+    color: white;
+    flex: 1;
+    min-width: 200px;
+}
+
+.ai-service-entry {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.ai-service-item:hover .ai-service-entry {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.ai-entry-text {
+    font-weight: 500;
+    color: white !important;
+}
+
+.ai-service-entry i {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+}
+
+.ai-service-item:hover .ai-service-entry i {
+    transform: translateX(2px);
 }
 
 /* AI服务成效页面样式 */
