@@ -1667,7 +1667,7 @@ const pageData = {
                                 <div class="detail-item">
                                     <div class="after-photo-entry">
                                         <i class="fas fa-camera"></i>
-                                        <span>事后拍照</span>
+                                        <span>服务后拍照</span>
                                     </div>
                                 </div>
                             </div>
