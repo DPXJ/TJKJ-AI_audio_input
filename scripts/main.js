@@ -9,20 +9,6 @@ const pageData = {
                     <h1>工作台</h1>
                 </div>
                 <div class="mobile-content">
-                    <!-- 顶部摘要（与截图一致） -->
-                    <div class="activity-summary">
-                        <div class="summary-top">
-                            <span class="activity-tag spraying">打药</span>
-                            <span style="color:#666">2025-08-13~2025-08-13</span>
-                        </div>
-                        <div class="summary-title">打药测试1</div>
-                        <div class="summary-list">
-                            <div class="detail-item"><span class="detail-label">基地/地块：</span><span class="detail-value">大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)</span></div>
-                            <div class="detail-item"><span class="detail-label">种植计划：</span><span class="detail-value">打药</span></div>
-                            <div class="detail-item"><span class="detail-label">负责人：</span><span class="detail-value">王成龙</span></div>
-                            <div class="detail-item"><span class="detail-label">备注：</span><span class="detail-value"></span></div>
-                        </div>
-                    </div>
                     <!-- 组织卡片 -->
                     <div class="card org-card">
                         <div class="org-row">
@@ -464,6 +450,21 @@ const pageData = {
                         <div class="detail-item">
                             <span class="detail-label">负责人：</span>
                             <span class="detail-value">张三</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 活动摘要卡片（截图样式） -->
+                    <div class="activity-summary">
+                        <div class="summary-top">
+                            <span class="activity-tag spraying">打药</span>
+                            <span style="color:#666;">2025-08-13~2025-08-13</span>
+                        </div>
+                        <div class="summary-title">打药测试1</div>
+                        <div class="summary-list">
+                            <div class="detail-item"><span class="detail-label">基地/地块：</span><span class="detail-value">大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)</span></div>
+                            <div class="detail-item"><span class="detail-label">种植计划：</span><span class="detail-value">打药</span></div>
+                            <div class="detail-item"><span class="detail-label">负责人：</span><span class="detail-value">王成龙</span></div>
+                            <div class="detail-item"><span class="detail-label">备注：</span><span class="detail-value"></span></div>
                         </div>
                     </div>
                     
@@ -1406,6 +1407,20 @@ const pageData = {
                     <h1>农事活动详情</h1>
                 </div>
                 <div class="mobile-content">
+                    <!-- 活动摘要卡片（截图样式） -->
+                    <div class="activity-summary">
+                        <div class="summary-top">
+                            <span class="activity-tag spraying">打药</span>
+                            <span style="color:#666;">2025-08-13~2025-08-13</span>
+                        </div>
+                        <div class="summary-title">打药测试1</div>
+                        <div class="summary-list">
+                            <div class="detail-item"><span class="detail-label">基地/地块：</span><span class="detail-value">大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)</span></div>
+                            <div class="detail-item"><span class="detail-label">种植计划：</span><span class="detail-value">打药</span></div>
+                            <div class="detail-item"><span class="detail-label">负责人：</span><span class="detail-value">王成龙</span></div>
+                            <div class="detail-item"><span class="detail-label">备注：</span><span class="detail-value"></span></div>
+                        </div>
+                    </div>
                     <!-- 农事照片 -->
                     <div class="detail-section">
                         <div class="section-header">
