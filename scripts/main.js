@@ -851,31 +851,31 @@ const pageData = {
                     <div class="stats-grid">
                             <div class="ai-stat-card">
                                 <div class="ai-stat-icon">
-                                    <i class="fas fa-brain"></i>
+                                    <i class="fas fa-seedling"></i>
                         </div>
-                                <div class="ai-stat-number">98.5%</div>
-                                <div class="ai-stat-label">AI识别准确率</div>
+                                <div class="ai-stat-number">50%</div>
+                                <div class="ai-stat-label">打药前杂草占比</div>
                         </div>
-                            <div class="ai-stat-card">
-                                <div class="ai-stat-icon">
-                                    <i class="fas fa-chart-line"></i>
-                        </div>
-                                <div class="ai-stat-number">+25%</div>
-                                <div class="ai-stat-label">效率提升</div>
-                            </div>
                             <div class="ai-stat-card">
                                 <div class="ai-stat-icon">
                                     <i class="fas fa-leaf"></i>
-                                </div>
-                                <div class="ai-stat-number">156</div>
-                                <div class="ai-stat-label">AI分析次数</div>
+                        </div>
+                                <div class="ai-stat-number">10%</div>
+                                <div class="ai-stat-label">打药后杂草占比</div>
                             </div>
                             <div class="ai-stat-card">
                                 <div class="ai-stat-icon">
-                                    <i class="fas fa-save"></i>
+                                    <i class="fas fa-chart-line-down"></i>
                                 </div>
-                                <div class="ai-stat-number">30%</div>
-                                <div class="ai-stat-label">成本节约</div>
+                                <div class="ai-stat-number">40%</div>
+                                <div class="ai-stat-label">杂草占比降低量</div>
+                            </div>
+                            <div class="ai-stat-card">
+                                <div class="ai-stat-icon">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="ai-stat-number">80%</div>
+                                <div class="ai-stat-label">杂草控制有效率</div>
                             </div>
                         </div>
                     </div>
