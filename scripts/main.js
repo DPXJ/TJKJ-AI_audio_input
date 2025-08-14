@@ -835,77 +835,186 @@ const pageData = {
         `
     },
     
-    salesChart: {
-        title: '销售统计',
-        subtitle: '销售数据分析',
+    aiServiceEffect: {
+        title: 'AI服务成效',
+        subtitle: 'AI技术驱动的农事服务效果分析',
         content: `
-            <div class="mobile-page">
+            <div class="mobile-page aiServiceEffect-page">
                 <div class="mobile-header">
-                    <h1>销售统计</h1>
-                    <div class="subtitle">销售数据分析</div>
+                    <h1>AI服务成效</h1>
+                    <div class="subtitle">AI技术驱动的农事服务效果分析</div>
                 </div>
                 <div class="mobile-content">
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number">¥45,678</div>
-                            <div class="stat-label">本月销售额</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">234</div>
-                            <div class="stat-label">本月订单数</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">¥195</div>
-                            <div class="stat-label">平均客单价</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number">12.5%</div>
-                            <div class="stat-label">环比增长</div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">销售趋势</div>
-                        </div>
-                        <div style="height: 200px; display: flex; align-items: center; justify-content: center; color: #666;">
-                            <div style="text-align: center;">
-                                <i class="fas fa-chart-line" style="font-size: 48px; margin-bottom: 10px; color: #ccc;"></i>
-                                <div>销售趋势图表</div>
-                                <div style="font-size: 12px; margin-top: 5px;">（演示用图表占位）</div>
+                    <!-- AI服务总览 -->
+                    <div class="ai-overview-section">
+                        <div class="stats-grid">
+                            <div class="ai-stat-card">
+                                <div class="ai-stat-icon">
+                                    <i class="fas fa-brain"></i>
+                                </div>
+                                <div class="ai-stat-number">98.5%</div>
+                                <div class="ai-stat-label">AI识别准确率</div>
+                            </div>
+                            <div class="ai-stat-card">
+                                <div class="ai-stat-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="ai-stat-number">+25%</div>
+                                <div class="ai-stat-label">效率提升</div>
+                            </div>
+                            <div class="ai-stat-card">
+                                <div class="ai-stat-icon">
+                                    <i class="fas fa-leaf"></i>
+                                </div>
+                                <div class="ai-stat-number">156</div>
+                                <div class="ai-stat-label">AI分析次数</div>
+                            </div>
+                            <div class="ai-stat-card">
+                                <div class="ai-stat-icon">
+                                    <i class="fas fa-save"></i>
+                                </div>
+                                <div class="ai-stat-number">30%</div>
+                                <div class="ai-stat-label">成本节约</div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="card">
+
+                    <!-- AI图像对比分析 -->
+                    <div class="card ai-comparison-section">
                         <div class="card-header">
-                            <div class="card-title">热销商品</div>
+                            <div class="card-title">
+                                <i class="fas fa-image"></i>
+                                AI农事前后对比分析
+                            </div>
+                            <button class="btn btn-small" onclick="showComparisonDetail()">查看详情</button>
                         </div>
-                        <div class="list-item">
-                            <div class="list-item-icon">
-                                <i class="fas fa-tshirt"></i>
+                        
+                        <div class="comparison-container">
+                            <div class="comparison-item">
+                                <div class="comparison-header">打药前</div>
+                                <div class="image-container">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRkZFQkVCIi8+CjxwYXRoIGQ9Ik00MCAzMEg4MFY1MEg0MFYzMFoiIGZpbGw9IiNEQzM1NDUiLz4KPHN2ZyB4PSI2MCIgeT0iNDAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDEwIDEwIiBmaWxsPSJub25lIj4KPGV4dCBmb250LXNpemU9IjQiIGZpbGw9IiNEQzM1NDUiPuWunOeJqzwvdGV4dD4KPC9zdmc+Cjwvc3ZnPgo=" alt="打药前图像">
+                                    <div class="ai-analysis-overlay">
+                                        <span class="pest-indicator high">虫害密度: 高</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="list-item-content">
-                                <div class="list-item-title">时尚T恤</div>
-                                <div class="list-item-subtitle">销量: 156件 | 销售额: ¥13,884</div>
+                            
+                            <div class="comparison-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>AI分析处理</span>
+                            </div>
+                            
+                            <div class="comparison-item">
+                                <div class="comparison-header">打药后</div>
+                                <div class="image-container">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRTZGNkVBIi8+CjxwYXRoIGQ9Ik00MCAzMEg4MFY1MEg0MFYzMFoiIGZpbGw9IiMyOEE3NDUiLz4KPHN2ZyB4PSI2MCIgeT0iNDAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDEwIDEwIiBmaWxsPSJub25lIj4KPGV4dCBmb250LXNpemU9IjQiIGZpbGw9IiMyOEE3NDUiPuWBpeW6tzwvdGV4dD4KPC9zdmc+Cjwvc3ZnPgo=" alt="打药后图像">
+                                    <div class="ai-analysis-overlay">
+                                        <span class="pest-indicator low">虫害密度: 低</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="list-item">
-                            <div class="list-item-icon">
-                                <i class="fas fa-shoe-prints"></i>
+                        
+                        <div class="comparison-result">
+                            <div class="result-item">
+                                <span class="result-label">AI检测结果:</span>
+                                <span class="result-value success">虫害控制率 95.2%</span>
                             </div>
-                            <div class="list-item-content">
-                                <div class="list-item-title">运动鞋</div>
-                                <div class="list-item-subtitle">销量: 89双 | 销售额: ¥26,611</div>
+                            <div class="result-item">
+                                <span class="result-label">叶片健康度:</span>
+                                <span class="result-value success">提升 80%</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">农药效果:</span>
+                                <span class="result-value success">优秀</span>
                             </div>
                         </div>
-                        <div class="list-item">
-                            <div class="list-item-icon">
-                                <i class="fas fa-mobile-alt"></i>
+                    </div>
+
+                    <!-- AI洞察报告 -->
+                    <div class="card ai-insights-section">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-lightbulb"></i>
+                                AI洞察报告
                             </div>
-                            <div class="list-item-content">
-                                <div class="list-item-title">智能手机</div>
-                                <div class="list-item-subtitle">销量: 23台 | 销售额: ¥68,977</div>
+                            <span class="report-date">2024-01-16</span>
+                        </div>
+                        
+                        <div class="insights-content">
+                            <div class="insight-item">
+                                <div class="insight-header">
+                                    <i class="fas fa-check-circle insight-icon success"></i>
+                                    <h4>病虫害防治效果</h4>
+                                </div>
+                                <div class="insight-text">
+                                    通过AI图像识别技术，检测到本次打药作业对目标害虫的控制效果显著。虫害密度从农事前的85%下降至5%，防治效率达到94.1%，超出预期目标15%。
+                                </div>
+                                <div class="insight-recommendation">
+                                    <strong>AI建议:</strong> 当前用药配比和施药时间最优，建议在类似气候条件下采用相同方案。
+                                </div>
+                            </div>
+                            
+                            <div class="insight-item">
+                                <div class="insight-header">
+                                    <i class="fas fa-leaf insight-icon growth"></i>
+                                    <h4>作物生长状况</h4>
+                                </div>
+                                <div class="insight-text">
+                                    AI分析显示，作物叶片颜色由黄绿转为深绿，叶片厚度增加12%，整体长势良好。预测在未来7-10天内将进入快速生长期。
+                                </div>
+                                <div class="insight-recommendation">
+                                    <strong>AI建议:</strong> 适当增加水肥供应，关注天气变化，预防可能的病害复发。
+                                </div>
+                            </div>
+                            
+                            <div class="insight-item">
+                                <div class="insight-header">
+                                    <i class="fas fa-chart-area insight-icon efficiency"></i>
+                                    <h4>效率优化分析</h4>
+                                </div>
+                                <div class="insight-text">
+                                    相比传统方式，AI辅助农事作业节省农药使用量20%，作业时间缩短30%，总体成本降低25%。
+                                </div>
+                                <div class="insight-recommendation">
+                                    <strong>AI建议:</strong> 可将此经验模式推广至其他相似地块，形成标准化作业流程。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI趋势分析 -->
+                    <div class="card ai-trends-section">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fas fa-chart-line"></i>
+                                AI服务效果趋势
+                            </div>
+                        </div>
+                        
+                        <div class="trends-chart">
+                            <div style="height: 150px; display: flex; align-items: center; justify-content: center; color: #666; background: #f8f9fa; border-radius: 8px;">
+                                <div style="text-align: center;">
+                                    <i class="fas fa-chart-area" style="font-size: 32px; margin-bottom: 10px; color: #0aa06e;"></i>
+                                    <div>AI效果提升趋势图</div>
+                                    <div style="font-size: 12px; margin-top: 5px; color: #0aa06e;">近30天平均提升25%</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trend-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label">识别准确率</span>
+                                <span class="metric-value">↗ 98.5%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">处理速度</span>
+                                <span class="metric-value">↗ 2.3s/次</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">成本节约</span>
+                                <span class="metric-value">↗ 30%</span>
                             </div>
                         </div>
                     </div>
@@ -1885,4 +1994,9 @@ function showToast(message) {
     setTimeout(() => {
         document.body.removeChild(toast);
     }, 2000);
-} 
+}
+
+// 显示AI对比分析详情
+window.showComparisonDetail = function() {
+    showToast('AI图像对比分析详情功能');
+}; 
