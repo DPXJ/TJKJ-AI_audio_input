@@ -865,14 +865,14 @@ const pageData = {
                             </div>
                             <div class="ai-stat-card">
                                 <div class="ai-stat-icon">
-                                    <i class="fas fa-chart-line-down"></i>
+                                    <i class="fas fa-arrow-down"></i>
                                 </div>
                                 <div class="ai-stat-number">40%</div>
                                 <div class="ai-stat-label">杂草占比降低量</div>
                             </div>
                             <div class="ai-stat-card">
                                 <div class="ai-stat-icon">
-                                    <i class="fas fa-percentage"></i>
+                                    <i class="fas fa-trophy"></i>
                                 </div>
                                 <div class="ai-stat-number">80%</div>
                                 <div class="ai-stat-label">杂草控制有效率</div>
