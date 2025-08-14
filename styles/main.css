@@ -1869,6 +1869,385 @@ body {
     color: #28a745;
 }
 
+/* 农事服务前后记录页面样式 */
+.farmServiceRecord-page {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.farmServiceRecord-page .mobile-header {
+    flex-shrink: 0;
+}
+
+.farmServiceRecord-page .mobile-content {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.farmServiceRecord-page .mobile-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* 服务信息卡片 */
+.service-info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+}
+
+.service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.service-date {
+    font-size: 12px;
+    color: #666;
+}
+
+.service-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.service-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.detail-row .detail-label {
+    font-size: 12px;
+    color: #666;
+    min-width: 70px;
+    flex-shrink: 0;
+}
+
+.detail-row .detail-value {
+    font-size: 12px;
+    color: #333;
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* 记录区域 */
+.record-section {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.record-section .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.record-section .section-header i {
+    color: #0aa06e;
+    font-size: 16px;
+}
+
+.record-section .section-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* 对比容器 */
+.comparison-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.comparison-side {
+    flex: 1;
+}
+
+.comparison-title {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.comparison-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 100px;
+}
+
+.divider-line {
+    width: 1px;
+    height: 30px;
+    background: #ddd;
+}
+
+.vs-text {
+    font-size: 10px;
+    font-weight: 600;
+    color: #666;
+    margin: 5px 0;
+    background: #f8f9fa;
+    padding: 2px 6px;
+    border-radius: 8px;
+}
+
+/* 照片网格 */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+
+.photo-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 1;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 图标照片样式 */
+.photo-item.icon-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    border: 2px solid #ddd;
+}
+
+.photo-item.icon-photo.before {
+    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+    border-color: #f8bbd9;
+}
+
+.photo-item.icon-photo.after {
+    background: linear-gradient(135deg, #e8f5e8, #c8e6c8);
+    border-color: #81c784;
+}
+
+.photo-icon {
+    font-size: 24px;
+    color: #666;
+}
+
+.photo-item.icon-photo.before .photo-icon {
+    color: #d32f2f;
+}
+
+.photo-item.icon-photo.after .photo-icon {
+    color: #2e7d32;
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 4px 8px;
+    font-size: 10px;
+}
+
+/* 视频网格 */
+.video-grid {
+    display: flex;
+    justify-content: center;
+}
+
+.video-item {
+    text-align: center;
+}
+
+.video-thumbnail {
+    width: 80px;
+    height: 60px;
+    background: #333;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.video-thumbnail i {
+    color: white;
+    font-size: 20px;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 8px;
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+.video-time {
+    font-size: 10px;
+    color: #666;
+}
+
+/* AI分析结果 */
+.ai-analysis-results {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.analysis-item {
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 3px solid #0aa06e;
+}
+
+.analysis-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.metric-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333;
+}
+
+.metric-change {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.before-value {
+    background: #ffebee;
+    color: #d32f2f;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.after-value {
+    background: #e8f5e8;
+    color: #2e7d32;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.metric-change i {
+    color: #666;
+    font-size: 10px;
+}
+
+.improvement {
+    background: #e3f2fd;
+    color: #1976d2;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* 整体结果 */
+.overall-result {
+    background: linear-gradient(135deg, #0aa06e, #21c08b);
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.result-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.result-score {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.result-description {
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: 0.9;
+}
+
+/* 底部按钮 */
+.farmServiceRecord-page .mobile-footer {
+    flex-shrink: 0;
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 10px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid #0aa06e;
+    color: #0aa06e;
+}
+
+.btn-outline:hover {
+    background: #0aa06e;
+    color: white;
+}
+
 @media (max-width: 768px) {
     .wb-stats-grid { grid-template-columns: repeat(2, 1fr); }
     .feature-grid { grid-template-columns: repeat(3, 1fr); }
