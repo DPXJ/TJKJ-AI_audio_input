@@ -919,15 +919,15 @@ const pageData = {
                         
                         <div class="comparison-result">
                             <div class="result-item">
-                                <span class="result-label">AI检测结果:</span>
-                                <span class="result-value success">虫害控制率 95.2%</span>
+                                <span class="result-label">杂草控制有效率:</span>
+                                <span class="result-value success">杂草控制率 80%</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-label">叶片健康度:</span>
-                                <span class="result-value success">提升 80%</span>
+                                <span class="result-label">杂草占比降低量:</span>
+                                <span class="result-value success">降低 40%</span>
                             </div>
                             <div class="result-item">
-                                <span class="result-label">农药效果:</span>
+                                <span class="result-label">打药效果:</span>
                                 <span class="result-value success">优秀</span>
                             </div>
                         </div>
