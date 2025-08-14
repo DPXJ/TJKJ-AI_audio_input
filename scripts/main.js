@@ -72,7 +72,7 @@ const pageData = {
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-stamp"></i></div><div class="fi-text">农事审批</div></div>
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-receipt"></i></div><div class="fi-text">我的领用</div></div>
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-bug"></i></div><div class="fi-text">病虫害识别</div></div>
-                            <div class="feature-item"><div class="fi-icon"><i class="fas fa-microchip"></i></div><div class="fi-text">田间工作站</div></div>
+                            <div class="feature-item" onclick="loadPage('fieldWorkstation')"><div class="fi-icon"><i class="fas fa-microchip"></i></div><div class="fi-text">田间工作站</div></div>
                             <div class="feature-item disabled"><div class="fi-icon"><i class="fas fa-ellipsis-h"></i></div><div class="fi-text">更多</div></div>
                         </div>
                     </div>
@@ -677,6 +677,223 @@ const pageData = {
                 </div>
             </div>
         `
+    },
+
+    fieldWorkstation: {
+        title: '田间工作站',
+        subtitle: '投入品使用成效核查配置',
+        content: `
+            <div class="mobile-page fieldWorkstation-page">
+                <div class="mobile-header">
+                    <h1>投入品使用成效核查配置</h1>
+                </div>
+                <div class="mobile-content">
+                    <!-- 配置开关 -->
+                    <div class="card">
+                        <div class="config-row">
+                            <span class="config-label">投入品使用成效核查配置开关</span>
+                            <div class="config-switch active">
+                                <span>已开启</span>
+                                <div class="switch-toggle"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 核查方式 -->
+                    <div class="card">
+                        <div class="section-title">投入品使用结果核查方式</div>
+                        <div class="radio-group">
+                            <div class="radio-item active">
+                                <div class="radio-circle"></div>
+                                <span>随机生成多点监测</span>
+                            </div>
+                            <div class="radio-item">
+                                <div class="radio-circle"></div>
+                                <span>田间摄像头拍照</span>
+                            </div>
+                        </div>
+                        <div class="selected-method">
+                            <i class="fas fa-circle"></i>
+                            <span>随机生成多点监测</span>
+                        </div>
+                    </div>
+
+                    <!-- 土壤肥力检测要求 -->
+                    <div class="card">
+                        <div class="section-title">
+                            <i class="fas fa-circle" style="color: #0aa06e; font-size: 8px; margin-right: 8px;"></i>
+                            土壤肥力检测要求
+                            <button class="ai-btn" onclick="showAIDialog('soil')">
+                                <i class="fas fa-robot"></i>
+                                AI设定要求
+                            </button>
+                        </div>
+                        
+                        <div class="config-section">
+                            <div class="config-text">施肥农事活动结束后,第 <input type="number" class="config-input" value="7"> 天,进行 土壤肥力检测</div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">土壤测肥任务开始时间:</span>
+                                <div class="time-input">
+                                    <span>选择时间</span>
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">土壤测肥任务截止时限:</span>
+                                <div class="time-input">
+                                    <input type="number" class="config-input" value="0" style="width: 40px;">
+                                    <span>小时</span>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">生成土壤测肥点位数量</span>
+                                <div class="time-input">
+                                    <input type="number" class="config-input" style="width: 40px;">
+                                    <span>个</span>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">土壤测肥点位有效区域</span>
+                                <div class="time-input">
+                                    <input type="number" class="config-input" style="width: 40px;">
+                                    <span>米(以内)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">肥力指标</span>
+                                <button class="btn-custom">自定义指标+</button>
+                            </div>
+                            
+                            <div class="indicator-list">
+                                <div class="indicator-item">
+                                    <span>氮</span>
+                                    <div class="switch-toggle"></div>
+                                </div>
+                                <div class="indicator-item">
+                                    <span>磷</span>
+                                    <div class="switch-toggle"></div>
+                                </div>
+                                <div class="indicator-item">
+                                    <span>钾</span>
+                                    <div class="switch-toggle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 作物长势拍照要求 -->
+                    <div class="card">
+                        <div class="section-title">
+                            <i class="fas fa-circle" style="color: #0aa06e; font-size: 8px; margin-right: 8px;"></i>
+                            作物长势拍照要求
+                            <button class="ai-btn" onclick="showAIDialog('crop')">
+                                <i class="fas fa-robot"></i>
+                                AI设定要求
+                            </button>
+                        </div>
+                        
+                        <div class="config-section">
+                            <div class="config-text">农事活动结束后,第 <input type="number" class="config-input" value="0"> 天,进行作物 长势拍照</div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">长势拍照任务开始时间:</span>
+                                <div class="time-input">
+                                    <span>07:00</span>
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">长势拍照任务截止时限:</span>
+                                <div class="time-input">
+                                    <input type="number" class="config-input" value="1" style="width: 40px;">
+                                    <span>小时</span>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">生成拍照打卡点位数量</span>
+                                <div class="time-input">
+                                    <input type="number" class="config-input" value="2" style="width: 40px;">
+                                    <span>个</span>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">拍照打卡点位有效区域</span>
+                                <div class="time-input">
+                                    <input type="number" class="config-input" value="20" style="width: 40px;">
+                                    <span>米(以内)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="config-row">
+                                <span class="config-label">每个点位拍照数量</span>
+                                <div class="time-input">
+                                    <input type="number" class="config-input" value="1" style="width: 40px;">
+                                    <span>张(含)以上</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 底部按钮 -->
+                <div class="mobile-footer action-footer">
+                    <button class="btn btn-secondary">取消</button>
+                    <button class="btn">确定</button>
+                </div>
+
+                <!-- AI设定弹窗 -->
+                <div class="ai-dialog" id="aiDialog">
+                    <div class="ai-dialog-content">
+                        <div class="ai-dialog-header">
+                            <h3><i class="fas fa-robot"></i> AI智能设定</h3>
+                            <button class="ai-close" onclick="hideAIDialog()">×</button>
+                        </div>
+                        <div class="ai-dialog-body">
+                            <div class="ai-section">
+                                <h4>基础信息</h4>
+                                <div class="ai-form-group">
+                                    <label>作物类型:</label>
+                                    <input type="text" id="cropType" value="小麦" disabled class="disabled-input">
+                                </div>
+                                <div class="ai-form-group">
+                                    <label>地理坐标:</label>
+                                    <input type="text" id="location" value="商丘市 柘城县 牛城乡 大运村" disabled class="disabled-input">
+                                </div>
+                                <div class="ai-form-group">
+                                    <label>种植方案:</label>
+                                    <select id="plantingPlan">
+                                        <option value="standard">标准种植</option>
+                                        <option value="intensive">密集种植</option>
+                                        <option value="organic">有机种植</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="ai-section">
+                                <h4>AI分析结果</h4>
+                                <div class="ai-analysis" id="aiAnalysis">
+                                    <div class="ai-loading">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                        正在分析...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-dialog-footer">
+                            <button class="btn btn-secondary" onclick="hideAIDialog()">取消</button>
+                            <button class="btn" onclick="applyAISettings()">应用设定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
     }
 };
 
@@ -788,4 +1005,261 @@ function updateNavigationState(pageName) {
 }
 
 // 全局页面加载函数（供HTML中的onclick调用）
-window.loadPage = loadPage; 
+window.loadPage = loadPage;
+
+// AI设定相关变量
+let currentAIType = '';
+let aiAnalysisTimeout = null;
+
+// 显示AI设定弹窗
+window.showAIDialog = function(type) {
+    currentAIType = type;
+    const dialog = document.getElementById('aiDialog');
+    if (dialog) {
+        dialog.classList.add('show');
+        // 模拟AI分析过程
+        startAIAnalysis();
+    }
+};
+
+// 隐藏AI设定弹窗
+window.hideAIDialog = function() {
+    const dialog = document.getElementById('aiDialog');
+    if (dialog) {
+        dialog.classList.remove('show');
+    }
+    if (aiAnalysisTimeout) {
+        clearTimeout(aiAnalysisTimeout);
+    }
+};
+
+// 开始AI分析
+function startAIAnalysis() {
+    const analysisDiv = document.getElementById('aiAnalysis');
+    if (!analysisDiv) return;
+    
+    // 显示加载状态
+    analysisDiv.innerHTML = `
+        <div class="ai-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            正在分析...
+        </div>
+    `;
+    
+    // 模拟AI分析延迟
+    aiAnalysisTimeout = setTimeout(() => {
+        const cropType = document.getElementById('cropType').value;
+        const location = document.getElementById('location').value;
+        const plantingPlan = document.getElementById('plantingPlan').value;
+        
+        // 根据AI类型生成不同的分析结果
+        if (currentAIType === 'soil') {
+            showSoilAnalysis(cropType, location, plantingPlan);
+        } else if (currentAIType === 'crop') {
+            showCropAnalysis(cropType, location, plantingPlan);
+        }
+    }, 2000);
+}
+
+// 显示土壤分析结果
+function showSoilAnalysis(cropType, location, plantingPlan) {
+    const analysisDiv = document.getElementById('aiAnalysis');
+    const analysisData = getSoilAnalysisData(cropType, location, plantingPlan);
+    
+    analysisDiv.innerHTML = `
+        <div class="ai-result">
+            <div class="ai-result-item ai-suggestion">
+                <strong>AI建议:</strong> ${analysisData.suggestion}
+            </div>
+            <div class="ai-result-item">
+                <strong>检测时间:</strong> 施肥后第${analysisData.detectionDay}天
+            </div>
+            <div class="ai-result-item">
+                <strong>检测点位:</strong> ${analysisData.points}个
+            </div>
+            <div class="ai-result-item">
+                <strong>有效区域:</strong> ${analysisData.area}米
+            </div>
+            <div class="ai-result-item">
+                <strong>关键指标:</strong> ${analysisData.indicators.join(', ')}
+            </div>
+        </div>
+    `;
+}
+
+// 显示作物分析结果
+function showCropAnalysis(cropType, location, plantingPlan) {
+    const analysisDiv = document.getElementById('aiAnalysis');
+    const analysisData = getCropAnalysisData(cropType, location, plantingPlan);
+    
+    analysisDiv.innerHTML = `
+        <div class="ai-result">
+            <div class="ai-result-item ai-suggestion">
+                <strong>AI建议:</strong> ${analysisData.suggestion}
+            </div>
+            <div class="ai-result-item">
+                <strong>拍照时间:</strong> 农事活动后第${analysisData.photoDay}天
+            </div>
+            <div class="ai-result-item">
+                <strong>拍照点位:</strong> ${analysisData.points}个
+            </div>
+            <div class="ai-result-item">
+                <strong>有效区域:</strong> ${analysisData.area}米
+            </div>
+            <div class="ai-result-item">
+                <strong>拍照数量:</strong> ${analysisData.photoCount}张/点位
+            </div>
+        </div>
+    `;
+}
+
+// 获取土壤分析数据
+function getSoilAnalysisData(cropType, location, plantingPlan) {
+    // 根据作物类型名称获取对应的英文key
+    const cropTypeMap = {
+        '小麦': 'wheat',
+        '玉米': 'corn',
+        '水稻': 'rice',
+        '大豆': 'soybean'
+    };
+    
+    const cropKey = cropTypeMap[cropType] || 'wheat';
+    
+    const data = {
+        wheat: {
+            detectionDay: 7,
+            points: 5,
+            area: 50,
+            indicators: ['氮', '磷', '钾', 'pH值'],
+            suggestion: '小麦生长期需要重点关注氮肥含量，建议增加氮元素检测频率'
+        },
+        corn: {
+            detectionDay: 5,
+            points: 6,
+            area: 60,
+            indicators: ['氮', '磷', '钾', '有机质'],
+            suggestion: '玉米对磷肥需求较高，建议重点监测磷元素变化'
+        },
+        rice: {
+            detectionDay: 3,
+            points: 4,
+            area: 40,
+            indicators: ['氮', '钾', 'pH值', '盐分'],
+            suggestion: '水稻种植需要控制土壤pH值，建议定期监测酸碱度'
+        },
+        soybean: {
+            detectionDay: 6,
+            points: 5,
+            area: 45,
+            indicators: ['氮', '磷', '钾', '微量元素'],
+            suggestion: '大豆固氮能力强，可适当减少氮肥检测频率'
+        }
+    };
+    
+    return data[cropKey];
+}
+
+// 获取作物分析数据
+function getCropAnalysisData(cropType, location, plantingPlan) {
+    // 根据作物类型名称获取对应的英文key
+    const cropTypeMap = {
+        '小麦': 'wheat',
+        '玉米': 'corn',
+        '水稻': 'rice',
+        '大豆': 'soybean'
+    };
+    
+    const cropKey = cropTypeMap[cropType] || 'wheat';
+    
+    const data = {
+        wheat: {
+            photoDay: 3,
+            points: 3,
+            area: 30,
+            photoCount: 2,
+            suggestion: '小麦分蘖期是关键观察期，建议增加拍照频率'
+        },
+        corn: {
+            photoDay: 5,
+            points: 4,
+            area: 40,
+            photoCount: 3,
+            suggestion: '玉米抽雄期需要重点观察，建议多角度拍照'
+        },
+        rice: {
+            photoDay: 2,
+            points: 3,
+            area: 25,
+            photoCount: 2,
+            suggestion: '水稻分蘖期生长迅速，建议每日观察记录'
+        },
+        soybean: {
+            photoDay: 4,
+            points: 3,
+            area: 35,
+            photoCount: 2,
+            suggestion: '大豆开花期是关键期，建议增加观察密度'
+        }
+    };
+    
+    return data[cropKey];
+}
+
+// 应用AI设定
+window.applyAISettings = function() {
+    const cropType = document.getElementById('cropType').value;
+    const analysisData = currentAIType === 'soil' ? 
+        getSoilAnalysisData(cropType) : 
+        getCropAnalysisData(cropType);
+    
+    // 根据AI类型填充不同的表单
+    if (currentAIType === 'soil') {
+        // 填充土壤检测表单
+        const inputs = document.querySelectorAll('.fieldWorkstation-page input[type="number"]');
+        if (inputs.length >= 4) {
+            inputs[0].value = analysisData.detectionDay; // 检测天数
+            inputs[2].value = analysisData.points; // 点位数量
+            inputs[3].value = analysisData.area; // 有效区域
+        }
+    } else if (currentAIType === 'crop') {
+        // 填充作物拍照表单
+        const inputs = document.querySelectorAll('.fieldWorkstation-page input[type="number"]');
+        if (inputs.length >= 6) {
+            inputs[4].value = analysisData.photoDay; // 拍照天数
+            inputs[6].value = analysisData.points; // 点位数量
+            inputs[7].value = analysisData.area; // 有效区域
+            inputs[8].value = analysisData.photoCount; // 拍照数量
+        }
+    }
+    
+    // 隐藏弹窗
+    hideAIDialog();
+    
+    // 显示成功提示
+    showToast('AI设定已应用');
+};
+
+// 显示提示信息
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 3000;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        document.body.removeChild(toast);
+    }, 2000);
+} 
