@@ -9,16 +9,30 @@ const pageData = {
                     <h1>工作台</h1>
                 </div>
                 <div class="mobile-content">
+                    <!-- 顶部摘要（与截图一致） -->
+                    <div class="activity-summary">
+                        <div class="summary-top">
+                            <span class="activity-tag spraying">打药</span>
+                            <span style="color:#666">2025-08-13~2025-08-13</span>
+                        </div>
+                        <div class="summary-title">打药测试1</div>
+                        <div class="summary-list">
+                            <div class="detail-item"><span class="detail-label">基地/地块：</span><span class="detail-value">大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)</span></div>
+                            <div class="detail-item"><span class="detail-label">种植计划：</span><span class="detail-value">打药</span></div>
+                            <div class="detail-item"><span class="detail-label">负责人：</span><span class="detail-value">王成龙</span></div>
+                            <div class="detail-item"><span class="detail-label">备注：</span><span class="detail-value"></span></div>
+                        </div>
+                    </div>
                     <!-- 组织卡片 -->
                     <div class="card org-card">
                         <div class="org-row">
                             <div class="org-name">
                                 龙腾虎跃有限公司（壹）
-                            </div>
+                        </div>
                             <a class="org-switch" href="javascript:void(0)">切换组织 <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
-
+                    
                     <!-- 统计概览 -->
                     <div class="card stats-card">
                         <div class="wb-stats-grid">
@@ -29,7 +43,7 @@ const pageData = {
                             <div class="wb-stat-item">
                                 <div class="wb-stat-number">1个</div>
                                 <div class="wb-stat-label">管理项目</div>
-                            </div>
+                        </div>
                             <div class="wb-stat-item">
                                 <div class="wb-stat-number">1/1个</div>
                                 <div class="wb-stat-label">管理基地/地块</div>
@@ -45,18 +59,18 @@ const pageData = {
                             <div class="wb-stat-item">
                                 <div class="wb-stat-number">0个</div>
                                 <div class="wb-stat-label">物联网设备</div>
-                            </div>
                         </div>
-                    </div>
+                            </div>
+                            </div>
 
                     <!-- 当前生产主体 -->
                     <div class="card subject-card">
                         <div class="subject-row">
                             <div class="subject-title">当前生产主体</div>
                             <a class="subject-switch" href="javascript:void(0)">切换 <i class="fas fa-arrow-right"></i></a>
-                        </div>
+                            </div>
                         <div class="subject-desc">大厅水培植物 | 一号分区</div>
-                    </div>
+                        </div>
 
                     <!-- 数字大田功能入口 -->
                     <div class="card">
@@ -74,9 +88,9 @@ const pageData = {
                             <div class="feature-item"><div class="fi-icon"><i class="fas fa-bug"></i></div><div class="fi-text">病虫害识别</div></div>
                             <div class="feature-item" onclick="loadPage('fieldWorkstation')"><div class="fi-icon"><i class="fas fa-microchip"></i></div><div class="fi-text">田间工作站</div></div>
                             <div class="feature-item disabled"><div class="fi-icon"><i class="fas fa-ellipsis-h"></i></div><div class="fi-text">更多</div></div>
-                        </div>
-                    </div>
-                </div>
+                            </div>
+                            </div>
+                            </div>
 
                 <!-- 底部导航 -->
                 <div class="mobile-footer tabbar">
@@ -222,6 +236,314 @@ const pageData = {
                             <div class="list-item-arrow">
                                 <i class="fas fa-chevron-right"></i>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `
+    },
+    
+    farmCalendar: {
+        title: '农事日历',
+        subtitle: '农事活动管理',
+        content: `
+            <div class="mobile-page farmCalendar-page">
+                <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                    <h1>农事日历</h1>
+                    <div class="subtitle">农事活动管理</div>
+                </div>
+                <div class="mobile-content">
+                    <!-- 日历导航 -->
+                    <div class="calendar-nav">
+                        <div class="calendar-header">
+                            <i class="fas fa-chevron-left"></i>
+                            <span>2024年1月</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="weekdays">
+                            <div class="weekday">日</div>
+                            <div class="weekday">一</div>
+                            <div class="weekday">二</div>
+                            <div class="weekday">三</div>
+                            <div class="weekday">四</div>
+                            <div class="weekday">五</div>
+                            <div class="weekday">六</div>
+                        </div>
+                        <div class="date-row">
+                            <div class="date-item">
+                                <div class="date-number">31</div>
+                                <div class="date-text">12月</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">1</div>
+                                <div class="date-text">元旦</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">2</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">3</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">4</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">5</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">6</div>
+                                <div class="date-text"></div>
+                            </div>
+                        </div>
+                        <div class="date-row">
+                            <div class="date-item">
+                                <div class="date-number">7</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">8</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">9</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">10</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">11</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">12</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">13</div>
+                                <div class="date-text"></div>
+                            </div>
+                        </div>
+                        <div class="date-row">
+                            <div class="date-item">
+                                <div class="date-number">14</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">15</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item today">
+                                <div class="date-number">16</div>
+                                <div class="date-text">今天</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">17</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">18</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">19</div>
+                                <div class="date-text"></div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">20</div>
+                                <div class="date-text"></div>
+                            </div>
+                        </div>
+                        <div class="calendar-expand">
+                            <i class="fas fa-chevron-down"></i> 展开更多
+                        </div>
+                    </div>
+                    
+                    <!-- 活动列表 -->
+                    <div class="activities-section">
+                        <h3>今日活动</h3>
+                        <div class="activity-card" onclick="loadPage('farmActivityDetail')">
+                            <div class="activity-header">
+                                <span class="activity-tag spraying">打药</span>
+                                <div class="activity-title">打药测试 1</div>
+                                <i class="fas fa-ellipsis-v activity-menu"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">时间：</span>
+                                    <span class="detail-value">09:00 - 11:00</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">地点：</span>
+                                    <span class="detail-value">A区小麦田</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">负责人：</span>
+                                    <span class="detail-value">张三</span>
+                                </div>
+                            </div>
+                            <div class="activity-status">
+                                <div class="status-stamp">已完成</div>
+                            </div>
+                        </div>
+                        
+                        <div class="activity-card">
+                            <div class="activity-header">
+                                <span class="activity-tag weeding">除草</span>
+                                <div class="activity-title">除草作业</div>
+                                <i class="fas fa-ellipsis-v activity-menu"></i>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">时间：</span>
+                                    <span class="detail-value">14:00 - 16:00</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">地点：</span>
+                                    <span class="detail-value">B区玉米田</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">负责人：</span>
+                                    <span class="detail-value">李四</span>
+                                </div>
+                            </div>
+                            <div class="activity-status">
+                                <div class="status-stamp">进行中</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 悬浮添加按钮 -->
+                <div class="fab">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+        `
+    },
+    
+    farmActivityDetail: {
+        title: '农事活动详情',
+        subtitle: '活动详细信息',
+        content: `
+            <div class="mobile-page farmActivityDetail-page">
+                <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                    <h1>农事活动详情</h1>
+                    <div class="subtitle">活动详细信息</div>
+                </div>
+                <div class="mobile-content">
+                    <!-- 基本信息 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h3>基本信息</h3>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">活动名称：</span>
+                            <span class="detail-value">打药测试 1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">活动类型：</span>
+                            <span class="detail-value">打药</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">执行时间：</span>
+                            <span class="detail-value">2024-01-16 09:00 - 11:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">执行地点：</span>
+                            <span class="detail-value">A区小麦田</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">负责人：</span>
+                            <span class="detail-value">张三</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 照片上传 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-camera"></i>
+                            <h3>现场照片</h3>
+                        </div>
+                        <div class="photo-upload">
+                            <div class="photo-item">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjVGNUY1Ii8+CjxwYXRoIGQ9Ik0yMCAyMEg0MFY0MEgyMFYyMFoiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+" alt="现场照片">
+                                <div class="photo-remove">×</div>
+                            </div>
+                            <div class="photo-item">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjVGNUY1Ii8+CjxwYXRoIGQ9Ik0yMCAyMEg0MFY0MEgyMFYyMFoiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+" alt="现场照片">
+                                <div class="photo-remove">×</div>
+                            </div>
+                            <div class="photo-add">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 视频上传 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-video"></i>
+                            <h3>现场视频</h3>
+                        </div>
+                        <div class="video-upload">
+                            <div class="video-item">
+                                <div class="video-thumbnail">
+                                    <i class="fas fa-play"></i>
+                                    <div class="video-duration">02:30</div>
+                                </div>
+                                <div class="video-remove">×</div>
+                            </div>
+                            <div class="video-add">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 监管项目 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h3>监管项目</h3>
+                        </div>
+                        <div class="monitoring-items">
+                            <div class="monitoring-item">
+                                <div class="monitoring-content">
+                                    <span>农药使用量：<span class="highlight">2.5L/亩</span></span>
+                                    <button class="btn btn-small btn-primary">正常</button>
+                                </div>
+                            </div>
+                            <div class="monitoring-item">
+                                <div class="monitoring-content">
+                                    <span>作业效率：<span class="highlight">85%</span></span>
+                                    <button class="btn btn-small btn-success">优秀</button>
+                                </div>
+                            </div>
+                            <div class="monitoring-item">
+                                <div class="monitoring-content">
+                                    <span>安全防护：<span class="highlight">100%</span></span>
+                                    <button class="btn btn-small btn-success">优秀</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 效果评估 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>效果评估</h3>
+                        </div>
+                        <div class="activity-description">
+                            本次打药作业效果显著，虫害控制率达到<span class="effect-highlight">95%</span>，作物生长状况良好，预计产量提升<span class="effect-highlight">15%</span>。
                         </div>
                     </div>
                 </div>
@@ -685,6 +1007,7 @@ const pageData = {
         content: `
             <div class="mobile-page fieldWorkstation-page">
                 <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
                     <h1>投入品使用成效核查配置</h1>
                 </div>
                 <div class="mobile-content">
@@ -894,10 +1217,277 @@ const pageData = {
                 </div>
             </div>
         `
+    },
+
+    farmCalendar: {
+        title: '农事日历',
+        subtitle: '农事活动管理',
+        content: `
+            <div class="mobile-page farmCalendar-page">
+                <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                    <h1>农事日历</h1>
+                </div>
+                <div class="mobile-content">
+                    <!-- 日历导航 -->
+                    <div class="calendar-nav">
+                        <div class="calendar-header">
+                            <i class="fas fa-chevron-left"></i>
+                            <span>2025/08</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        
+                        <!-- 星期标题 -->
+                        <div class="weekdays">
+                            <div class="weekday">日</div>
+                            <div class="weekday">一</div>
+                            <div class="weekday">二</div>
+                            <div class="weekday">三</div>
+                            <div class="weekday">四</div>
+                            <div class="weekday">五</div>
+                            <div class="weekday">六</div>
+                        </div>
+                        
+                        <!-- 日期显示 -->
+                        <div class="date-row">
+                            <div class="date-item">
+                                <div class="date-number">10</div>
+                                <div class="date-text">十七</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">11</div>
+                                <div class="date-text">十八</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">12</div>
+                                <div class="date-text">十九</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">13</div>
+                                <div class="date-text">二十</div>
+                            </div>
+                            <div class="date-item today">
+                                <div class="date-number">14</div>
+                                <div class="date-text">今日</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">15</div>
+                                <div class="date-text">廿二</div>
+                            </div>
+                            <div class="date-item">
+                                <div class="date-number">16</div>
+                                <div class="date-text">廿三</div>
+                            </div>
+                        </div>
+                        
+                        <div class="calendar-expand">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+
+                    <!-- 农事活动列表 -->
+                    <div class="activities-section">
+                        <h3>农事活动</h3>
+                        
+                        <!-- 活动卡片1 -->
+                        <div class="activity-card">
+                            <div class="activity-header">
+                                <div class="activity-tag spraying">打药</div>
+                                <div class="activity-title">打药</div>
+                                <div class="activity-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">种植计划:</span>
+                                    <span class="detail-value">打药</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">作物/品种:</span>
+                                    <span class="detail-value">水仙花(1号)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">基地/地块:</span>
+                                    <span class="detail-value">大厅水培植物|一号分区|一号基地 (水培区|一号地块)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">农事时间:</span>
+                                    <span class="detail-value">2025-08-12~2025-08-12</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">负责人:</span>
+                                    <span class="detail-value">王成龙</span>
+                                </div>
+                            </div>
+                            <div class="activity-status completed">
+                                <div class="status-stamp">已完成</div>
+                            </div>
+                        </div>
+
+                        <!-- 活动卡片2 -->
+                        <div class="activity-card" onclick="loadPage('farmActivityDetail')">
+                            <div class="activity-header">
+                                <div class="activity-tag spraying">打药</div>
+                                <div class="activity-title">打药测试1</div>
+                                <div class="activity-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">种植计划:</span>
+                                    <span class="detail-value">打药</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">作物/品种:</span>
+                                    <span class="detail-value">水仙花(1号)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">基地/地块:</span>
+                                    <span class="detail-value">大厅水培植物|一号分区|一号基地 (水培区|一号地块)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">农事时间:</span>
+                                    <span class="detail-value">2025-08-13~2025-08-13</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">负责人:</span>
+                                    <span class="detail-value">王成龙</span>
+                                </div>
+                            </div>
+                            <div class="activity-status completed">
+                                <div class="status-stamp">已完成</div>
+                            </div>
+                        </div>
+
+                        <!-- 活动卡片3 -->
+                        <div class="activity-card">
+                            <div class="activity-header">
+                                <div class="activity-tag weeding">除草</div>
+                                <div class="activity-title">除草</div>
+                                <div class="activity-menu">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </div>
+                            </div>
+                            <div class="activity-details">
+                                <div class="detail-item">
+                                    <span class="detail-label">种植计划:</span>
+                                    <span class="detail-value">打药</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">作物/品种:</span>
+                                    <span class="detail-value">水仙花(1号)</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">基地/地块:</span>
+                                    <span class="detail-value">大厅水培植物|一号分区|一号基地 (水培区|一号地块)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 浮动添加按钮 -->
+                <div class="fab">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+        `
+    },
+
+    farmActivityDetail: {
+        title: '农事活动详情',
+        subtitle: '打药测试1',
+        content: `
+            <div class="mobile-page farmActivityDetail-page">
+                <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                    <h1>农事活动详情</h1>
+                </div>
+                <div class="mobile-content">
+                    <!-- 农事照片 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-mountain"></i>
+                            <h3>农事照片</h3>
+                        </div>
+                        <div class="photo-upload">
+                            <div class="photo-item">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjNEZBRjUwIi8+CjxwYXRoIGQ9Ik0yMCAyMEg0MFY0MEgyMFYyMFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=" alt="农事照片">
+                                <div class="photo-remove">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="photo-add">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 上传农事视频 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-play"></i>
+                            <h3>上传农事视频</h3>
+                        </div>
+                        <div class="video-upload">
+                            <div class="video-item">
+                                <div class="video-thumbnail">
+                                    <i class="fas fa-play"></i>
+                                    <span class="video-duration">00:02</span>
+                                </div>
+                                <div class="video-remove">
+                                    <i class="fas fa-times"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 投入品使用成效监管 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>投入品使用成效监管: 人工拍照</h3>
+                        </div>
+                        <div class="monitoring-items">
+                            <div class="monitoring-item">
+                                <div class="monitoring-content">
+                                    <span>现场工作人员已完成农事活动前的拍照任务</span>
+                                    <button class="btn btn-small">查看</button>
+                                </div>
+                            </div>
+                            <div class="monitoring-item">
+                                <div class="monitoring-content">
+                                    <span>现场工作人员<span class="highlight">超时未完成</span>农事活动后的拍照任务</span>
+                                    <button class="btn btn-small">查看</button>
+                                </div>
+                            </div>
+                            <div class="monitoring-item">
+                                <div class="monitoring-content">
+                                    <span>经AI技术对比分析,整体效果提升: <span class="effect-highlight">90%</span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 农事活动描述 -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <h3>农事活动描述</h3>
+                        </div>
+                        <div class="activity-description">
+                            <span>测试1</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mobile-footer">
+                    <button class="btn" style="width:100%;">保存</button>
+                </div>
+            </div>
+        `
     }
 };
-
-// 当前页面
 let currentPage = 'home';
 
 // 初始化
@@ -964,6 +1554,10 @@ function loadPage(pageName) {
     const pageInfo = pageData[pageName];
     
     if (pageInfo) {
+        if (!window.__pageStack) window.__pageStack = [];
+        if (window.currentPage) {
+            window.__pageStack.push(window.currentPage);
+        }
         // 更新页面内容
         phoneContent.innerHTML = pageInfo.content;
         
@@ -1005,7 +1599,21 @@ function updateNavigationState(pageName) {
 }
 
 // 全局页面加载函数（供HTML中的onclick调用）
-window.loadPage = loadPage;
+window.loadPage = loadPage; 
+window.goBack = function() {
+    const phoneContent = document.getElementById('phoneContent');
+    if (!window.__pageStack || window.__pageStack.length === 0) {
+        // 栈为空，退回到首页
+        currentPage = 'home';
+        phoneContent.innerHTML = pageData.home.content;
+        updateNavigationState('home');
+        return;
+    }
+    const prev = window.__pageStack.pop();
+    currentPage = prev;
+    phoneContent.innerHTML = pageData[prev].content;
+    updateNavigationState(prev);
+};
 
 // AI设定相关变量
 let currentAIType = '';
