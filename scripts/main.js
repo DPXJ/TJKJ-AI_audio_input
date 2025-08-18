@@ -590,6 +590,7 @@ const pageData = {
                 <!-- AI语音输入按钮 -->
                 <div class="ai-voice-button" onclick="startVoiceInput()">
                     <i class="fas fa-microphone-alt"></i>
+                    <span class="ai-text">AI</span>
                 </div>
                 
                 <!-- 底部确认按钮 -->
@@ -650,6 +651,37 @@ const pageData = {
                                     <button class="btn btn-secondary" onclick="reRecord()">重新录音</button>
                                     <button class="btn btn-primary" onclick="confirmResult()">确认使用</button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI智能解析过渡弹窗 -->
+                <div class="ai-processing-modal" id="aiProcessingModal">
+                    <div class="processing-content">
+                        <div class="modal-header">
+                            <h3>AI智能解析中</h3>
+                            <button class="close-btn" onclick="hideAIProcessing()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="processing-body">
+                            <ul class="timeline" id="processingTimeline">
+                                <li class="step"><span class="dot"></span><span class="label">语音转文字</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">意图理解</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">实体抽取</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">表单映射</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">完成</span></li>
+                            </ul>
+                            <div class="variables-card">
+                                <div class="vc-title"><i class="fas fa-list"></i> AI识别到的变量</div>
+                                <div class="variables-list" id="extractedVariables">
+                                    <!-- 变量结果将由JS填充 -->
+                                </div>
+                            </div>
+                            <div class="countdown-section">
+                                <div class="countdown-text">即将自动填充表单</div>
+                                <div class="countdown-timer" id="countdownTimer">3</div>
                             </div>
                         </div>
                     </div>
@@ -2341,6 +2373,8 @@ let recordingTimer = null;
 let recordingStartTime = null;
 let realtimeTextTimer = null;
 let currentText = '';
+let inactivityCheckTimer = null; // 30秒未输入检测
+let lastRealtimeUpdateTs = 0;
 let mockTexts = [
     "我要为大厅水培植物基地",
     "我要为大厅水培植物基地的水仙花",
@@ -2379,6 +2413,7 @@ window.closeVoiceModal = function() {
             isPaused = false;
             stopRecordingTimer();
             stopRealtimeText();
+            stopInactivityTimer();
         }
     }
 };
@@ -2393,18 +2428,9 @@ window.startRecording = function() {
     recordingStartTime = Date.now();
     startRecordingTimer();
     startRealtimeText();
+    startInactivityTimer();
+    lastRealtimeUpdateTs = Date.now();
     showRecordingState();
-    
-    // 模拟6秒后自动完成录音并显示结果
-    setTimeout(() => {
-        if (isRecording && !isPaused) {
-            const mockTranscript = mockTexts[mockTexts.length - 1];
-            showResultState(mockTranscript);
-            isRecording = false;
-            stopRecordingTimer();
-            stopRealtimeText();
-        }
-    }, 6000);
 };
 
 // 重新录音（模拟版本）
@@ -2415,6 +2441,7 @@ window.reRecord = function() {
     isPaused = false;
     stopRecordingTimer();
     stopRealtimeText();
+    stopInactivityTimer();
     // 模拟重新录音
     setTimeout(() => {
         startRecording();
@@ -2425,9 +2452,9 @@ window.reRecord = function() {
 window.confirmResult = function() {
     const resultText = document.getElementById('resultText').textContent;
     if (resultText) {
-        parseAndFillForm(resultText);
+        // 展示AI处理过渡
         closeVoiceModal();
-        showToast('表单已自动填充完成！');
+        showAIProcessing(resultText);
     }
 };
 
@@ -2443,6 +2470,91 @@ window.finishRecording = function() {
     const transcript = finalText || '我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙';
     showResultState(transcript);
 };
+
+// 展示AI处理过渡
+function showAIProcessing(transcript) {
+    const modal = document.getElementById('aiProcessingModal');
+    const timeline = document.getElementById('processingTimeline').querySelectorAll('.step');
+    const varList = document.getElementById('extractedVariables');
+    
+    if (!modal || !timeline || !varList) return;
+    
+    // 清理状态
+    modal.classList.add('show');
+    timeline.forEach(s => s.classList.remove('active'));
+    varList.innerHTML = '';
+    
+    const parsed = parseVoiceToFormData(transcript);
+    const steps = [
+        () => timeline[0].classList.add('active'),
+        () => timeline[1].classList.add('active'),
+        () => {
+            timeline[2].classList.add('active');
+            // 渲染变量
+            const mapping = {
+                plantingPlan: '种植计划',
+                basePlot: '基地地块',
+                crop: '作物',
+                activityType: '农事类型',
+                activityName: '活动名称',
+                startTime: '开始时间',
+                endTime: '结束时间',
+                personInCharge: '负责人',
+                remarks: '备注'
+            };
+            Object.keys(parsed).forEach(key => {
+                const value = parsed[key];
+                if (!value) return;
+                const item = document.createElement('div');
+                item.className = 'var-item';
+                item.innerHTML = `<span class="var-name">${mapping[key] || key}</span><span class="var-value">${value}</span>`;
+                varList.appendChild(item);
+            });
+        },
+        () => timeline[3].classList.add('active'),
+        () => {
+            timeline[4].classList.add('active');
+            // 开始3秒倒计时
+            startCountdown(() => {
+                parseAndFillForm(transcript);
+                hideAIProcessing();
+                showToast('表单已自动填充完成！');
+            });
+        }
+    ];
+    
+    // 依次推进步骤
+    let idx = 0;
+    const advance = () => {
+        if (idx >= steps.length) return;
+        steps[idx++]();
+        if (idx < steps.length) setTimeout(advance, 600);
+    };
+    advance();
+}
+
+function hideAIProcessing() {
+    const modal = document.getElementById('aiProcessingModal');
+    if (modal) modal.classList.remove('show');
+}
+
+// 倒计时功能
+function startCountdown(callback) {
+    let count = 3;
+    const timerElement = document.getElementById('countdownTimer');
+    
+    const countdown = setInterval(() => {
+        count--;
+        if (timerElement) {
+            timerElement.textContent = count;
+        }
+        
+        if (count <= 0) {
+            clearInterval(countdown);
+            if (callback) callback();
+        }
+    }, 1000);
+}
 
 // 显示初始状态
 function showInitialState() {
@@ -2635,6 +2747,7 @@ window.pauseRecording = function() {
     if (isRecording && !isPaused) {
         isPaused = true;
         stopRealtimeText();
+        stopInactivityTimer();
         document.getElementById('pauseBtn').style.display = 'none';
         document.getElementById('continueBtn').style.display = 'flex';
         document.querySelector('.recording-text').textContent = '录音已暂停';
@@ -2646,6 +2759,8 @@ window.continueRecording = function() {
     if (isRecording && isPaused) {
         isPaused = false;
         startRealtimeText();
+        startInactivityTimer();
+        lastRealtimeUpdateTs = Date.now();
         document.getElementById('pauseBtn').style.display = 'flex';
         document.getElementById('continueBtn').style.display = 'none';
         document.querySelector('.recording-text').textContent = '正在录音，请说话...';
@@ -2667,6 +2782,7 @@ function startRealtimeText() {
                 realtimeTextElement.classList.add('typing');
             }
             textIndex++;
+            lastRealtimeUpdateTs = Date.now();
         }
     }, 1000); // 每秒更新一次文字
 }
@@ -2681,5 +2797,36 @@ function stopRealtimeText() {
     const realtimeTextElement = document.getElementById('realtimeText');
     if (realtimeTextElement) {
         realtimeTextElement.classList.remove('typing');
+    }
+}
+
+// 未录入超时检测（30秒）
+function startInactivityTimer() {
+    stopInactivityTimer();
+    inactivityCheckTimer = setInterval(() => {
+        if (!isRecording || isPaused) return;
+        const now = Date.now();
+        if (now - lastRealtimeUpdateTs >= 30000) { // 30秒无更新
+            isRecording = false;
+            stopRecordingTimer();
+            stopRealtimeText();
+            stopInactivityTimer();
+            const realtimeTextElement = document.getElementById('realtimeText');
+            if (realtimeTextElement && realtimeTextElement.textContent.trim() === '') {
+                // 完全没有内容
+                showToast('长时间未录入，已停止录入');
+            } else {
+                // 有部分内容，仍提示停止
+                showToast('长时间未录入，已停止录入');
+            }
+            showInitialState();
+        }
+    }, 1000);
+}
+
+function stopInactivityTimer() {
+    if (inactivityCheckTimer) {
+        clearInterval(inactivityCheckTimer);
+        inactivityCheckTimer = null;
     }
 }
