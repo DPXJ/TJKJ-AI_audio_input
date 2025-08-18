@@ -623,6 +623,26 @@ const pageData = {
                                 </div>
                                 <div class="recording-text">正在录音，请说话...</div>
                                 <div class="recording-time" id="recordingTime">00:00</div>
+                                
+                                <!-- 实时回显文字 -->
+                                <div class="realtime-text-container">
+                                    <div class="realtime-text" id="realtimeText"></div>
+                                </div>
+                                
+                                <!-- 录音控制按钮 -->
+                                <div class="recording-controls">
+                                    <button class="btn btn-pause" id="pauseBtn" onclick="pauseRecording()">
+                                        <i class="fas fa-pause"></i>
+                                        <span>暂停</span>
+                                    </button>
+                                    <button class="btn btn-continue" id="continueBtn" onclick="continueRecording()" style="display: none;">
+                                        <i class="fas fa-play"></i>
+                                        <span>继续</span>
+                                    </button>
+                                    <button class="btn btn-finish" id="finishBtn" onclick="finishRecording()">
+                                        完成
+                                    </button>
+                                </div>
                             </div>
                             <div class="voice-result" id="voiceResult" style="display: none;">
                                 <div class="result-text" id="resultText"></div>
@@ -2278,22 +2298,26 @@ function showToast(message) {
     toast.className = 'toast';
     toast.textContent = message;
     toast.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: rgba(0, 0, 0, 0.85);
         color: white;
         padding: 12px 20px;
-        border-radius: 6px;
+        border-radius: 8px;
         font-size: 14px;
         z-index: 3000;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.25);
     `;
-    
-    document.body.appendChild(toast);
-    
+
+    // 将提示添加到手机屏幕内部，确保不越界
+    const phoneScreen = document.querySelector('.phone-screen') || document.getElementById('phoneContent') || document.body;
+    phoneScreen.appendChild(toast);
+
     setTimeout(() => {
-        document.body.removeChild(toast);
+        if (toast.parentElement) {
+            toast.parentElement.removeChild(toast);
+        }
     }, 2000);
 }
 
@@ -2312,8 +2336,20 @@ window.exportRecord = function() {
 // AI语音识别相关变量
 let recognition = null;
 let isRecording = false;
+let isPaused = false;
 let recordingTimer = null;
 let recordingStartTime = null;
+let realtimeTextTimer = null;
+let currentText = '';
+let mockTexts = [
+    "我要为大厅水培植物基地",
+    "我要为大厅水培植物基地的水仙花",
+    "我要为大厅水培植物基地的水仙花安排打药活动",
+    "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点",
+    "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点",
+    "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙"
+];
+let textIndex = 0;
 
 // 初始化语音识别（模拟版本）
 function initSpeechRecognition() {
@@ -2340,7 +2376,9 @@ window.closeVoiceModal = function() {
         modal.classList.remove('show');
         if (isRecording) {
             isRecording = false;
+            isPaused = false;
             stopRecordingTimer();
+            stopRealtimeText();
         }
     }
 };
@@ -2349,22 +2387,34 @@ window.closeVoiceModal = function() {
 window.startRecording = function() {
     console.log('开始录音（模拟模式）');
     isRecording = true;
+    isPaused = false;
+    textIndex = 0;
+    currentText = '';
     recordingStartTime = Date.now();
     startRecordingTimer();
+    startRealtimeText();
     showRecordingState();
     
-    // 模拟3秒后自动完成录音并显示结果
+    // 模拟6秒后自动完成录音并显示结果
     setTimeout(() => {
-        const mockTranscript = "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙";
-        showResultState(mockTranscript);
-        isRecording = false;
-        stopRecordingTimer();
-    }, 3000);
+        if (isRecording && !isPaused) {
+            const mockTranscript = mockTexts[mockTexts.length - 1];
+            showResultState(mockTranscript);
+            isRecording = false;
+            stopRecordingTimer();
+            stopRealtimeText();
+        }
+    }, 6000);
 };
 
 // 重新录音（模拟版本）
 window.reRecord = function() {
     showInitialState();
+    // 清理状态
+    isRecording = false;
+    isPaused = false;
+    stopRecordingTimer();
+    stopRealtimeText();
     // 模拟重新录音
     setTimeout(() => {
         startRecording();
@@ -2379,6 +2429,19 @@ window.confirmResult = function() {
         closeVoiceModal();
         showToast('表单已自动填充完成！');
     }
+};
+
+// 完成录音并进入下一步（模拟）
+window.finishRecording = function() {
+    // 若还在录音，先停下
+    if (isRecording) {
+        isRecording = false;
+        stopRecordingTimer();
+        stopRealtimeText();
+    }
+    const finalText = document.getElementById('realtimeText')?.textContent || '';
+    const transcript = finalText || '我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙';
+    showResultState(transcript);
 };
 
 // 显示初始状态
@@ -2566,3 +2629,57 @@ document.addEventListener('DOMContentLoaded', function() {
     // 初始化语音识别
     initSpeechRecognition();
 });
+
+// 暂停录音
+window.pauseRecording = function() {
+    if (isRecording && !isPaused) {
+        isPaused = true;
+        stopRealtimeText();
+        document.getElementById('pauseBtn').style.display = 'none';
+        document.getElementById('continueBtn').style.display = 'flex';
+        document.querySelector('.recording-text').textContent = '录音已暂停';
+    }
+};
+
+// 继续录音
+window.continueRecording = function() {
+    if (isRecording && isPaused) {
+        isPaused = false;
+        startRealtimeText();
+        document.getElementById('pauseBtn').style.display = 'flex';
+        document.getElementById('continueBtn').style.display = 'none';
+        document.querySelector('.recording-text').textContent = '正在录音，请说话...';
+    }
+};
+
+// 开始实时回显文字
+function startRealtimeText() {
+    if (realtimeTextTimer) {
+        clearInterval(realtimeTextTimer);
+    }
+    
+    realtimeTextTimer = setInterval(() => {
+        if (isRecording && !isPaused && textIndex < mockTexts.length) {
+            currentText = mockTexts[textIndex];
+            const realtimeTextElement = document.getElementById('realtimeText');
+            if (realtimeTextElement) {
+                realtimeTextElement.textContent = currentText;
+                realtimeTextElement.classList.add('typing');
+            }
+            textIndex++;
+        }
+    }, 1000); // 每秒更新一次文字
+}
+
+// 停止实时回显文字
+function stopRealtimeText() {
+    if (realtimeTextTimer) {
+        clearInterval(realtimeTextTimer);
+        realtimeTextTimer = null;
+    }
+    
+    const realtimeTextElement = document.getElementById('realtimeText');
+    if (realtimeTextElement) {
+        realtimeTextElement.classList.remove('typing');
+    }
+}
