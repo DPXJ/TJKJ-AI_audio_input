@@ -500,12 +500,24 @@ const pageData = {
                     <h1>添加农事活动</h1>
                 </div>
                 <div class="mobile-content">
+                    <!-- AI语音输入提示 -->
+                    <div class="ai-voice-tip">
+                        <div class="tip-content">
+                            <i class="fas fa-microphone-alt"></i>
+                            <span>点击下方AI按钮，语音输入表单信息</span>
+                        </div>
+                        <div class="tip-examples">
+                            <span class="example-title">示例：</span>
+                            <span class="example-text">"我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙"</span>
+                        </div>
+                    </div>
+                    
                     <div class="form-container">
                         <!-- 种植计划 -->
                         <div class="form-group">
                             <label class="form-label required">种植计划:</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请选择">
+                                <input type="text" class="form-input" id="plantingPlan" placeholder="请选择">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </div>
@@ -513,20 +525,20 @@ const pageData = {
                         <!-- 基地地块 -->
                         <div class="form-group">
                             <label class="form-label required">基地地块</label>
-                            <input type="text" class="form-input" placeholder="">
+                            <input type="text" class="form-input" id="basePlot" placeholder="">
                         </div>
                         
                         <!-- 作物 -->
                         <div class="form-group">
                             <label class="form-label required">作物:</label>
-                            <input type="text" class="form-input" placeholder="">
+                            <input type="text" class="form-input" id="crop" placeholder="">
                         </div>
                         
                         <!-- 农事类型 -->
                         <div class="form-group">
                             <label class="form-label required">农事类型:</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请选择">
+                                <input type="text" class="form-input" id="activityType" placeholder="请选择">
                                 <button class="add-type-btn">
                                     <i class="fas fa-plus"></i>
                                 </button>
@@ -536,16 +548,16 @@ const pageData = {
                         <!-- 活动名称 -->
                         <div class="form-group">
                             <label class="form-label required">活动名称:</label>
-                            <input type="text" class="form-input" placeholder="请输入">
+                            <input type="text" class="form-input" id="activityName" placeholder="请输入">
                         </div>
                         
                         <!-- 活动时间 -->
                         <div class="form-group">
                             <label class="form-label required">活动时间:</label>
                             <div class="time-input-group">
-                                <input type="text" class="form-input" placeholder="开始时间">
+                                <input type="text" class="form-input" id="startTime" placeholder="开始时间">
                                 <span class="time-separator">至</span>
-                                <input type="text" class="form-input" placeholder="结束时间">
+                                <input type="text" class="form-input" id="endTime" placeholder="结束时间">
                             </div>
                         </div>
                         
@@ -553,7 +565,7 @@ const pageData = {
                         <div class="form-group">
                             <label class="form-label required">负责人:</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请选择">
+                                <input type="text" class="form-input" id="personInCharge" placeholder="请选择">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </div>
@@ -570,14 +582,57 @@ const pageData = {
                         <!-- 备注 -->
                         <div class="form-group">
                             <label class="form-label">备注:</label>
-                            <textarea class="form-textarea" placeholder="请输入内容"></textarea>
+                            <textarea class="form-textarea" id="remarks" placeholder="请输入内容"></textarea>
                         </div>
                     </div>
+                </div>
+                
+                <!-- AI语音输入按钮 -->
+                <div class="ai-voice-button" onclick="startVoiceInput()">
+                    <i class="fas fa-microphone-alt"></i>
                 </div>
                 
                 <!-- 底部确认按钮 -->
                 <div class="mobile-footer">
                     <button class="btn btn-confirm">确定</button>
+                </div>
+                
+                <!-- AI语音识别弹窗 -->
+                <div class="ai-voice-modal" id="aiVoiceModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>AI语音识别</h3>
+                            <button class="close-btn" onclick="closeVoiceModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="voice-status" id="voiceStatus">
+                                <div class="status-icon">
+                                    <i class="fas fa-microphone-alt"></i>
+                                </div>
+                                <div class="status-text">点击开始录音</div>
+                            </div>
+                            <div class="voice-recording" id="voiceRecording" style="display: none;">
+                                <div class="recording-animation">
+                                    <div class="wave-container">
+                                        <div class="wave"></div>
+                                        <div class="wave"></div>
+                                        <div class="wave"></div>
+                                    </div>
+                                </div>
+                                <div class="recording-text">正在录音，请说话...</div>
+                                <div class="recording-time" id="recordingTime">00:00</div>
+                            </div>
+                            <div class="voice-result" id="voiceResult" style="display: none;">
+                                <div class="result-text" id="resultText"></div>
+                                <div class="result-actions">
+                                    <button class="btn btn-secondary" onclick="reRecord()">重新录音</button>
+                                    <button class="btn btn-primary" onclick="confirmResult()">确认使用</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `
@@ -1867,6 +1922,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 绑定侧边栏切换事件
     bindSidebarToggle();
+    
+    // 初始化语音识别
+    initSpeechRecognition();
 });
 
 // 绑定导航事件
@@ -2250,3 +2308,261 @@ window.shareRecord = function() {
 window.exportRecord = function() {
     showToast('农事服务报告导出功能');
 }; 
+
+// AI语音识别相关变量
+let recognition = null;
+let isRecording = false;
+let recordingTimer = null;
+let recordingStartTime = null;
+
+// 初始化语音识别（模拟版本）
+function initSpeechRecognition() {
+    console.log('语音识别功能已初始化（模拟模式）');
+}
+
+// 开始语音输入
+window.startVoiceInput = function() {
+    const modal = document.getElementById('aiVoiceModal');
+    if (modal) {
+        modal.classList.add('show');
+        initSpeechRecognition();
+        // 确保初始状态正确显示
+        setTimeout(() => {
+            showInitialState();
+        }, 100);
+    }
+};
+
+// 关闭语音弹窗
+window.closeVoiceModal = function() {
+    const modal = document.getElementById('aiVoiceModal');
+    if (modal) {
+        modal.classList.remove('show');
+        if (isRecording) {
+            isRecording = false;
+            stopRecordingTimer();
+        }
+    }
+};
+
+// 开始录音（模拟版本）
+window.startRecording = function() {
+    console.log('开始录音（模拟模式）');
+    isRecording = true;
+    recordingStartTime = Date.now();
+    startRecordingTimer();
+    showRecordingState();
+    
+    // 模拟3秒后自动完成录音并显示结果
+    setTimeout(() => {
+        const mockTranscript = "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙";
+        showResultState(mockTranscript);
+        isRecording = false;
+        stopRecordingTimer();
+    }, 3000);
+};
+
+// 重新录音（模拟版本）
+window.reRecord = function() {
+    showInitialState();
+    // 模拟重新录音
+    setTimeout(() => {
+        startRecording();
+    }, 500);
+};
+
+// 确认使用结果
+window.confirmResult = function() {
+    const resultText = document.getElementById('resultText').textContent;
+    if (resultText) {
+        parseAndFillForm(resultText);
+        closeVoiceModal();
+        showToast('表单已自动填充完成！');
+    }
+};
+
+// 显示初始状态
+function showInitialState() {
+    const statusElement = document.getElementById('voiceStatus');
+    const recordingElement = document.getElementById('voiceRecording');
+    const resultElement = document.getElementById('voiceResult');
+    
+    if (statusElement) statusElement.style.display = 'block';
+    if (recordingElement) recordingElement.style.display = 'none';
+    if (resultElement) resultElement.style.display = 'none';
+    
+    // 添加点击事件
+    if (statusElement) {
+        statusElement.onclick = function() {
+            startRecording();
+        };
+    }
+}
+
+// 显示录音状态
+function showRecordingState() {
+    const statusElement = document.getElementById('voiceStatus');
+    const recordingElement = document.getElementById('voiceRecording');
+    const resultElement = document.getElementById('voiceResult');
+    
+    if (statusElement) statusElement.style.display = 'none';
+    if (recordingElement) recordingElement.style.display = 'block';
+    if (resultElement) resultElement.style.display = 'none';
+}
+
+// 显示结果状态
+function showResultState(transcript) {
+    const statusElement = document.getElementById('voiceStatus');
+    const recordingElement = document.getElementById('voiceRecording');
+    const resultElement = document.getElementById('voiceResult');
+    const resultTextElement = document.getElementById('resultText');
+    
+    if (statusElement) statusElement.style.display = 'none';
+    if (recordingElement) recordingElement.style.display = 'none';
+    if (resultElement) resultElement.style.display = 'block';
+    
+    if (resultTextElement) resultTextElement.textContent = transcript;
+}
+
+// 显示错误状态
+function showErrorState(error) {
+    let errorMessage = '语音识别失败';
+    switch(error) {
+        case 'no-speech':
+            errorMessage = '没有检测到语音，请重试';
+            break;
+        case 'audio-capture':
+            errorMessage = '无法访问麦克风，请检查权限';
+            break;
+        case 'not-allowed':
+            errorMessage = '麦克风权限被拒绝';
+            break;
+        case 'network':
+            errorMessage = '网络连接错误';
+            break;
+    }
+    
+    showToast(errorMessage);
+    showInitialState();
+}
+
+// 开始录音计时器
+function startRecordingTimer() {
+    recordingStartTime = Date.now();
+    recordingTimer = setInterval(updateRecordingTime, 1000);
+}
+
+// 停止录音计时器
+function stopRecordingTimer() {
+    if (recordingTimer) {
+        clearInterval(recordingTimer);
+        recordingTimer = null;
+    }
+}
+
+// 更新录音时间显示
+function updateRecordingTime() {
+    if (recordingStartTime) {
+        const elapsed = Math.floor((Date.now() - recordingStartTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('recordingTime').textContent = timeString;
+    }
+}
+
+// AI解析语音并填充表单
+function parseAndFillForm(transcript) {
+    // 模拟AI解析过程
+    const parsedData = parseVoiceToFormData(transcript);
+    
+    // 填充表单字段
+    Object.keys(parsedData).forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element && parsedData[fieldId]) {
+            element.value = parsedData[fieldId];
+            element.classList.add('ai-filled');
+            
+            // 移除动画类
+            setTimeout(() => {
+                element.classList.remove('ai-filled');
+            }, 500);
+        }
+    });
+}
+
+// 语音解析为表单数据
+function parseVoiceToFormData(transcript) {
+    const data = {};
+    
+    // 解析基地地块
+    const basePlotMatch = transcript.match(/(大厅水培植物|基地|地块)/g);
+    if (basePlotMatch) {
+        data.basePlot = '大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)';
+    }
+    
+    // 解析作物
+    const cropMatch = transcript.match(/(水仙花|小麦|玉米|水稻|大豆)/);
+    if (cropMatch) {
+        data.crop = cropMatch[0];
+    }
+    
+    // 解析农事类型
+    const activityTypeMatch = transcript.match(/(打药|施肥|浇水|除草|播种|收获)/);
+    if (activityTypeMatch) {
+        data.activityType = activityTypeMatch[0];
+    }
+    
+    // 解析活动名称
+    if (activityTypeMatch) {
+        data.activityName = `${activityTypeMatch[0]}活动`;
+    }
+    
+    // 解析时间
+    const timeMatch = transcript.match(/(明天|今天|后天)?\s*(上午|下午|晚上)?\s*(\d{1,2})[点时:：](\d{0,2})?\s*(到|至)\s*(\d{1,2})[点时:：](\d{0,2})?/);
+    if (timeMatch) {
+        const startHour = timeMatch[3];
+        const startMinute = timeMatch[4] || '00';
+        const endHour = timeMatch[6];
+        const endMinute = timeMatch[7] || '00';
+        
+        // 处理上午下午
+        let startTime = `${startHour.padStart(2, '0')}:${startMinute}`;
+        let endTime = `${endHour.padStart(2, '0')}:${endMinute}`;
+        
+        if (timeMatch[2] === '下午' || timeMatch[2] === '晚上') {
+            startTime = `${parseInt(startHour) + 12}:${startMinute}`;
+            endTime = `${parseInt(endHour) + 12}:${endMinute}`;
+        }
+        
+        data.startTime = startTime;
+        data.endTime = endTime;
+    }
+    
+    // 解析负责人
+    const personMatch = transcript.match(/(王成龙|张三|李四|王五)/);
+    if (personMatch) {
+        data.personInCharge = personMatch[0];
+    }
+    
+    // 解析种植计划
+    if (data.crop && data.activityType) {
+        data.plantingPlan = `${data.crop}${data.activityType}计划`;
+    }
+    
+    // 解析备注
+    const remarksMatch = transcript.match(/(备注|说明|注意|要求)[：:]\s*(.+)/);
+    if (remarksMatch) {
+        data.remarks = remarksMatch[2];
+    }
+    
+    return data;
+}
+
+// 页面加载完成后初始化语音识别
+document.addEventListener('DOMContentLoaded', function() {
+    // 原有的初始化代码...
+    
+    // 初始化语音识别
+    initSpeechRecognition();
+});
