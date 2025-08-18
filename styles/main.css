@@ -1322,7 +1322,7 @@ body {
 
 /* 浮动添加按钮 */
 .fab {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     right: 20px;
     width: 56px;
@@ -2285,5 +2285,446 @@ body {
 @media (max-width: 768px) {
     .wb-stats-grid { grid-template-columns: repeat(2, 1fr); }
     .feature-grid { grid-template-columns: repeat(3, 1fr); }
+}
+ 
+/* 种植计划页面样式 */
+.plantingPlan-page {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.plantingPlan-page .mobile-header {
+    flex-shrink: 0;
+}
+
+.plantingPlan-page .mobile-content {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.plantingPlan-page .mobile-content::-webkit-scrollbar {
+    display: none;
+}
+
+/* 主导航标签样式 */
+.plan-tabs {
+    display: flex;
+    background: white;
+    border-radius: 12px;
+    padding: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+}
+
+.plan-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.plan-tab.active {
+    background: #0aa06e;
+    color: white;
+}
+
+.plan-tab i {
+    font-size: 16px;
+}
+
+.plan-tab span {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* 子标签过滤器样式 */
+.filter-tabs {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    padding: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 15px;
+}
+
+.filter-tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.filter-tab.active {
+    background: #0aa06e;
+    color: white;
+    font-weight: 600;
+}
+
+/* 种植计划卡片样式 */
+.plan-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+}
+
+.plan-header {
+    margin-bottom: 12px;
+}
+
+.plan-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status-badge {
+    background: #ffc107;
+    color: #333;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    border: 1px solid #ffc107;
+}
+
+.plan-type {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.plan-details {
+    margin-bottom: 12px;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.detail-label {
+    color: #666;
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.detail-value {
+    color: #333;
+    flex: 1;
+}
+
+.plan-expand {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #666;
+    font-size: 12px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    padding: 8px 0;
+    border-top: 1px solid #f0f0f0;
+}
+
+.plan-expand i {
+    font-size: 10px;
+    transition: transform 0.3s ease;
+}
+
+.plan-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: #0aa06e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 2;
+}
+
+.btn-primary:hover {
+    background: #088f5f;
+    transform: translateY(-1px);
+}
+ 
+/* 添加农事活动页面样式 */
+.addFarmActivity-page {
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.addFarmActivity-page .mobile-header {
+    flex-shrink: 0;
+}
+
+.addFarmActivity-page .mobile-content {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.addFarmActivity-page .mobile-content::-webkit-scrollbar {
+    display: none;
+}
+
+.addFarmActivity-page .mobile-footer {
+    flex-shrink: 0;
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* 表单容器 */
+.form-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* 表单组样式 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-label.required::after {
+    content: '*';
+    color: #dc3545;
+    margin-left: 2px;
+}
+
+/* 输入框样式 */
+.form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #0aa06e;
+    box-shadow: 0 0 0 3px rgba(10, 160, 110, 0.1);
+}
+
+.form-input::placeholder {
+    color: #999;
+}
+
+/* 输入框包装器（用于带图标的输入框） */
+.form-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-input-wrapper .form-input {
+    padding-right: 40px;
+}
+
+.form-input-wrapper i {
+    position: absolute;
+    right: 12px;
+    color: #666;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* 添加类型按钮 */
+.add-type-btn {
+    position: absolute;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: #0aa06e;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-type-btn:hover {
+    background: #088f5f;
+    transform: scale(1.1);
+}
+
+.add-type-btn i {
+    font-size: 12px;
+}
+
+/* 时间输入组 */
+.time-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time-input-group .form-input {
+    flex: 1;
+}
+
+.time-separator {
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 文本域样式 */
+.form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    min-height: 80px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #0aa06e;
+    box-shadow: 0 0 0 3px rgba(10, 160, 110, 0.1);
+}
+
+.form-textarea::placeholder {
+    color: #999;
+}
+
+/* 开关样式 */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-label {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background: #ddd;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-label::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-input:checked + .toggle-label {
+    background: #0aa06e;
+}
+
+.toggle-input:checked + .toggle-label::after {
+    transform: translateX(26px);
+}
+
+/* 确认按钮样式 */
+.btn-confirm {
+    width: 100%;
+    background: #0aa06e;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-confirm:hover {
+    background: #088f5f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 160, 110, 0.3);
+}
+
+.btn-confirm:active {
+    transform: translateY(0);
 }
  

@@ -414,139 +414,170 @@ const pageData = {
         `
     },
     
-    farmActivityDetail: {
-        title: '农事活动详情',
-        subtitle: '活动详细信息',
+    plantingPlan: {
+        title: '种植计划',
+        subtitle: '管理种植计划',
         content: `
-            <div class="mobile-page farmActivityDetail-page">
+            <div class="mobile-page plantingPlan-page">
                 <div class="mobile-header">
                     <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
-                    <h1>农事活动详情</h1>
-                    <div class="subtitle">活动详细信息</div>
+                    <h1>种植计划</h1>
+                    <div class="subtitle">管理种植计划</div>
                 </div>
                 <div class="mobile-content">
-                    <!-- 基本信息 -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <i class="fas fa-info-circle"></i>
-                            <h3>基本信息</h3>
+                    <!-- 主导航标签 -->
+                    <div class="plan-tabs">
+                        <div class="plan-tab">
+                            <i class="fas fa-book"></i>
+                            <span>指导方案库</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">活动名称：</span>
-                            <span class="detail-value">打药测试 1</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">活动类型：</span>
-                            <span class="detail-value">打药</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">执行时间：</span>
-                            <span class="detail-value">2024-01-16 09:00 - 11:00</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">执行地点：</span>
-                            <span class="detail-value">A区小麦田</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">负责人：</span>
-                            <span class="detail-value">张三</span>
+                        <div class="plan-tab active">
+                            <i class="fas fa-file-alt"></i>
+                            <span>我的方案</span>
                         </div>
                     </div>
                     
-                    <!-- 活动摘要卡片（截图样式） -->
-                    <div class="activity-summary">
-                        <div class="summary-top">
-                            <span class="activity-tag spraying">打药</span>
-                            <span style="color:#666;">2025-08-13~2025-08-13</span>
-                        </div>
-                        <div class="summary-title">打药测试1</div>
-                        <div class="summary-list">
-                            <div class="detail-item"><span class="detail-label">基地/地块：</span><span class="detail-value">大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)</span></div>
-                            <div class="detail-item"><span class="detail-label">种植计划：</span><span class="detail-value">打药</span></div>
-                            <div class="detail-item"><span class="detail-label">负责人：</span><span class="detail-value">王成龙</span></div>
-                            <div class="detail-item"><span class="detail-label">备注：</span><span class="detail-value"></span></div>
-                        </div>
+                    <!-- 子标签过滤器 -->
+                    <div class="filter-tabs">
+                        <div class="filter-tab">全部</div>
+                        <div class="filter-tab">未开始</div>
+                        <div class="filter-tab active">进行中</div>
+                        <div class="filter-tab">已完成</div>
                     </div>
                     
-                    <!-- 照片上传 -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <i class="fas fa-camera"></i>
-                            <h3>现场照片</h3>
-                        </div>
-                        <div class="photo-upload">
-                            <div class="photo-item">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjVGNUY1Ii8+CjxwYXRoIGQ9Ik0yMCAyMEg0MFY0MEgyMFYyMFoiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+" alt="现场照片">
-                                <div class="photo-remove">×</div>
-                            </div>
-                            <div class="photo-item">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjRjVGNUY1Ii8+CjxwYXRoIGQ9Ik0yMCAyMEg0MFY0MEgyMFYyMFoiIGZpbGw9IiNDQ0NDQ0MiLz4KPC9zdmc+" alt="现场照片">
-                                <div class="photo-remove">×</div>
-                            </div>
-                            <div class="photo-add">
-                                <i class="fas fa-plus"></i>
+                    <!-- 种植计划卡片 -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-status">
+                                <span class="status-badge">进行中</span>
+                                <span class="plan-type">打药</span>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- 视频上传 -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <i class="fas fa-video"></i>
-                            <h3>现场视频</h3>
+                        <div class="plan-details">
+                            <div class="detail-row">
+                                <span class="detail-label">项目：</span>
+                                <span class="detail-value">大厅水培植物 | 一号分区</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">基地/地块：</span>
+                                <span class="detail-value">大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">作物及品种：</span>
+                                <span class="detail-value">水仙花(1号)</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">种植周期：</span>
+                                <span class="detail-value">水仙花(2025-08-12~2025-08-15)</span>
+                            </div>
                         </div>
-                        <div class="video-upload">
-                            <div class="video-item">
-                                <div class="video-thumbnail">
-                                    <i class="fas fa-play"></i>
-                                    <div class="video-duration">02:30</div>
-                                </div>
-                                <div class="video-remove">×</div>
-                            </div>
-                            <div class="video-add">
-                                <i class="fas fa-plus"></i>
-                            </div>
+                        <div class="plan-expand">
+                            <span>展开</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="plan-actions">
+                            <button class="btn btn-danger">结束</button>
+                            <button class="btn btn-primary">查看农事活动</button>
                         </div>
                     </div>
-                    
-                    <!-- 监管项目 -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <i class="fas fa-clipboard-check"></i>
-                            <h3>监管项目</h3>
+                </div>
+
+                <!-- 悬浮添加按钮 -->
+                <div class="fab">
+                    <i class="fas fa-plus"></i>
+                </div>
+            </div>
+        `
+    },
+    
+    addFarmActivity: {
+        title: '添加农事活动',
+        subtitle: '创建新的农事活动',
+        content: `
+            <div class="mobile-page addFarmActivity-page">
+                <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                    <h1>添加农事活动</h1>
+                </div>
+                <div class="mobile-content">
+                    <div class="form-container">
+                        <!-- 种植计划 -->
+                        <div class="form-group">
+                            <label class="form-label required">种植计划:</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请选择">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
                         </div>
-                        <div class="monitoring-items">
-                            <div class="monitoring-item">
-                                <div class="monitoring-content">
-                                    <span>农药使用量：<span class="highlight">2.5L/亩</span></span>
-                                    <button class="btn btn-small btn-primary">正常</button>
-                                </div>
+                        
+                        <!-- 基地地块 -->
+                        <div class="form-group">
+                            <label class="form-label required">基地地块</label>
+                            <input type="text" class="form-input" placeholder="">
+                        </div>
+                        
+                        <!-- 作物 -->
+                        <div class="form-group">
+                            <label class="form-label required">作物:</label>
+                            <input type="text" class="form-input" placeholder="">
+                        </div>
+                        
+                        <!-- 农事类型 -->
+                        <div class="form-group">
+                            <label class="form-label required">农事类型:</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请选择">
+                                <button class="add-type-btn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
-                            <div class="monitoring-item">
-                                <div class="monitoring-content">
-                                    <span>作业效率：<span class="highlight">85%</span></span>
-                                    <button class="btn btn-small btn-success">优秀</button>
-                                </div>
+                        </div>
+                        
+                        <!-- 活动名称 -->
+                        <div class="form-group">
+                            <label class="form-label required">活动名称:</label>
+                            <input type="text" class="form-input" placeholder="请输入">
+                        </div>
+                        
+                        <!-- 活动时间 -->
+                        <div class="form-group">
+                            <label class="form-label required">活动时间:</label>
+                            <div class="time-input-group">
+                                <input type="text" class="form-input" placeholder="开始时间">
+                                <span class="time-separator">至</span>
+                                <input type="text" class="form-input" placeholder="结束时间">
                             </div>
-                            <div class="monitoring-item">
-                                <div class="monitoring-content">
-                                    <span>安全防护：<span class="highlight">100%</span></span>
-                                    <button class="btn btn-small btn-success">优秀</button>
-                                </div>
+                        </div>
+                        
+                        <!-- 负责人 -->
+                        <div class="form-group">
+                            <label class="form-label required">负责人:</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请选择">
+                                <i class="fas fa-chevron-down"></i>
                             </div>
+                        </div>
+                        
+                        <!-- 是否用工 -->
+                        <div class="form-group">
+                            <label class="form-label">是否用工:</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="useLabor" class="toggle-input">
+                                <label for="useLabor" class="toggle-label"></label>
+                            </div>
+                        </div>
+                        
+                        <!-- 备注 -->
+                        <div class="form-group">
+                            <label class="form-label">备注:</label>
+                            <textarea class="form-textarea" placeholder="请输入内容"></textarea>
                         </div>
                     </div>
-                    
-                    <!-- 效果评估 -->
-                    <div class="detail-section">
-                        <div class="section-header">
-                            <i class="fas fa-chart-line"></i>
-                            <h3>效果评估</h3>
-                        </div>
-                        <div class="activity-description">
-                            本次打药作业效果显著，虫害控制率达到<span class="effect-highlight">95%</span>，作物生长状况良好，预计产量提升<span class="effect-highlight">15%</span>。
-                        </div>
-                    </div>
+                </div>
+                
+                <!-- 底部确认按钮 -->
+                <div class="mobile-footer">
+                    <button class="btn btn-confirm">确定</button>
                 </div>
             </div>
         `
