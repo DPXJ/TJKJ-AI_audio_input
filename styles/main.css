@@ -1625,7 +1625,7 @@ body {
     transform: translateX(2px);
 }
 
-/* AI服务成效页面样式 */
+/* 农事方案库页面样式 */
 .aiServiceEffect-page {
     height: 100%;
     position: relative;
@@ -1651,6 +1651,44 @@ body {
 
 .aiServiceEffect-page .mobile-content::-webkit-scrollbar {
     display: none;
+}
+
+/* 方案卡片样式 */
+.plan-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.plan-details .detail-row {
+    display: flex;
+    margin-bottom: 6px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.plan-details .detail-label {
+    color: #666;
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+.plan-details .detail-value {
+    color: #333;
+    flex: 1;
+}
+
+.plan-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.plan-actions .btn {
+    padding: 8px 16px;
+    font-size: 12px;
+    border-radius: 6px;
 }
 
 /* AI统计卡片样式 */
@@ -1903,8 +1941,8 @@ body {
     color: #28a745;
 }
 
-/* 农事服务前后记录页面样式 */
-.farmServiceRecord-page {
+/* 新建农事方案页面样式 */
+.newFarmPlan-page {
     height: 100%;
     position: relative;
     overflow: hidden;
@@ -1912,23 +1950,309 @@ body {
     flex-direction: column;
 }
 
-.farmServiceRecord-page .mobile-header {
+.newFarmPlan-page .mobile-header {
     flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    padding-top: 50px;
 }
 
-.farmServiceRecord-page .mobile-content {
+.newFarmPlan-page .mobile-header h1 {
     flex: 1;
-    padding: 15px;
-    overflow-y: auto;
+    text-align: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.header-actions {
     display: flex;
-    flex-direction: column;
     gap: 15px;
+    color: white;
+    font-size: 16px;
+}
+
+/* 进度指示器样式 */
+.progress-indicator {
+    background: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #999;
+    font-size: 14px;
+}
+
+.progress-step.active {
+    color: #0aa06e;
+    font-weight: 600;
+}
+
+.step-number {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.progress-step.active .step-number {
+    background: #0aa06e;
+    color: white;
+}
+
+.progress-arrow {
+    color: #ccc;
+    font-size: 12px;
+}
+
+.newFarmPlan-page .mobile-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #f8f9fa;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
 
-.farmServiceRecord-page .mobile-content::-webkit-scrollbar {
+.newFarmPlan-page .mobile-content::-webkit-scrollbar {
     display: none;
+}
+
+/* 表单容器样式 */
+.form-container {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 必填字段标记 */
+.form-label.required::after {
+    content: '*';
+    color: #dc3545;
+    margin-left: 4px;
+}
+
+/* 添加作物按钮 */
+.add-crop-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: #0aa06e;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* 单位文本样式 */
+.unit-text {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* 下一步按钮样式 */
+.btn-next {
+    width: 100%;
+    background: #0aa06e;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-next:hover {
+    background: #088f5f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 160, 110, 0.3);
+}
+
+.newFarmPlan-page .mobile-footer {
+    flex-shrink: 0;
+    padding: 15px 20px;
+    background: white;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* 方案计划页面特定样式 */
+.plan-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.plan-section-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.add-plan-btn {
+    width: 32px;
+    height: 32px;
+    background: #0aa06e;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.add-plan-btn:hover {
+    background: #088f5f;
+    transform: scale(1.1);
+}
+
+/* 方案计划卡片样式 */
+.plan-card {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.plan-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.plan-date {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #0aa06e;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.plan-date i {
+    font-size: 14px;
+}
+
+.plan-options {
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.plan-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.plan-detail-item {
+    display: flex;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.plan-detail-item .detail-label {
+    color: #666;
+    min-width: 70px;
+    flex-shrink: 0;
+}
+
+.plan-detail-item .detail-value {
+    color: #333;
+    flex: 1;
+}
+
+/* 底部按钮组样式 */
+.footer-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-prev {
+    flex: 1;
+    background: #0aa06e;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-prev:hover {
+    background: #088f5f;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(10, 160, 110, 0.3);
+}
+
+.btn-complete {
+    flex: 1;
+    background: #fd7e14;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-complete:hover {
+    background: #e8690b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(253, 126, 20, 0.3);
+}
+
+/* 进度步骤完成状态 */
+.progress-step.completed {
+    color: #0aa06e;
+    font-weight: 600;
+}
+
+.progress-step.completed .step-number {
+    background: #0aa06e;
+    color: white;
 }
 
 /* 服务信息卡片 */

@@ -974,387 +974,279 @@ const pageData = {
     },
     
     aiServiceEffect: {
-        title: 'AI服务成效',
-        subtitle: 'AI技术驱动的农事服务效果分析',
+        title: '农事方案库',
+        subtitle: '我的方案',
         content: `
             <div class="mobile-page aiServiceEffect-page">
                 <div class="mobile-header">
                     <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
-                    <h1>AI服务成效</h1>
-                    <div class="subtitle">AI技术驱动的农事服务效果分析</div>
+                    <h1>农事方案库</h1>
+                    <div class="subtitle">我的方案</div>
                 </div>
                 <div class="mobile-content">
-                    <!-- AI服务总览 -->
-                    <div class="ai-overview-section">
-                    <div class="stats-grid">
-                            <div class="ai-stat-card">
-                                <div class="ai-stat-icon">
-                                    <i class="fas fa-seedling"></i>
+                    <!-- 主导航标签 -->
+                    <div class="plan-tabs">
+                        <div class="plan-tab">
+                            <i class="fas fa-book"></i>
+                            <span>农事方案库</span>
                         </div>
-                                <div class="ai-stat-number">50%</div>
-                                <div class="ai-stat-label">打药前杂草占比</div>
-                        </div>
-                            <div class="ai-stat-card">
-                                <div class="ai-stat-icon">
-                                    <i class="fas fa-leaf"></i>
-                        </div>
-                                <div class="ai-stat-number">10%</div>
-                                <div class="ai-stat-label">打药后杂草占比</div>
-                            </div>
-                            <div class="ai-stat-card">
-                                <div class="ai-stat-icon">
-                                    <i class="fas fa-arrow-down"></i>
-                                </div>
-                                <div class="ai-stat-number">40%</div>
-                                <div class="ai-stat-label">杂草占比降低量</div>
-                            </div>
-                            <div class="ai-stat-card">
-                                <div class="ai-stat-icon">
-                                    <i class="fas fa-trophy"></i>
-                                </div>
-                                <div class="ai-stat-number">80%</div>
-                                <div class="ai-stat-label">杂草控制有效率</div>
-                            </div>
+                        <div class="plan-tab active">
+                            <i class="fas fa-file-alt"></i>
+                            <span>我的方案</span>
                         </div>
                     </div>
                     
-                    <!-- AI图像对比分析 -->
-                    <div class="card ai-comparison-section">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <i class="fas fa-image"></i>
-                                AI农事前后对比分析
+                    <!-- 方案卡片 -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <div class="plan-title">水仙花 | 8月管理1号方案</div>
                         </div>
-                            <button class="btn btn-small" onclick="loadPage('farmServiceRecord')">查看详情</button>
-                        </div>
-                        
-                        <div class="comparison-container">
-                            <div class="comparison-item">
-                                <div class="comparison-header">打药前</div>
-                                <div class="image-container">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRkZFQkVCIi8+CjxwYXRoIGQ9Ik00MCAzMEg4MFY1MEg0MFYzMFoiIGZpbGw9IiNEQzM1NDUiLz4KPHN2ZyB4PSI2MCIgeT0iNDAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDEwIDEwIiBmaWxsPSJub25lIj4KPGV4dCBmb250LXNpemU9IjQiIGZpbGw9IiNEQzM1NDUiPuWunOeJqzwvdGV4dD4KPC9zdmc+Cjwvc3ZnPgo=" alt="打药前图像">
-                                    <div class="ai-analysis-overlay">
-                                        <span class="pest-indicator high">虫害密度: 高</span>
+                        <div class="plan-details">
+                            <div class="detail-row">
+                                <span class="detail-label">作物种类:</span>
+                                <span class="detail-value">水仙花</span>
                             </div>
+                            <div class="detail-row">
+                                <span class="detail-label">作物品种:</span>
+                                <span class="detail-value">1号</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">种植面积:</span>
+                                <span class="detail-value">1亩</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">指导专家:</span>
+                                <span class="detail-value"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">所属单位:</span>
+                                <span class="detail-value"></span>
+                            </div>
+                        </div>
+                        <div class="plan-actions">
+                            <button class="btn btn-primary">提交官方认证</button>
                         </div>
                     </div>
                     
-                            <div class="comparison-arrow">
-                                <i class="fas fa-arrow-right"></i>
-                                <span>AI分析处理</span>
-                            </div>
-                            
-                            <div class="comparison-item">
-                                <div class="comparison-header">打药后</div>
-                                <div class="image-container">
-                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMTIwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiBmaWxsPSIjRTZGNkVBIi8+CjxwYXRoIGQ9Ik00MCAzMEg4MFY1MEg0MFYzMFoiIGZpbGw9IiMyOEE3NDUiLz4KPHN2ZyB4PSI2MCIgeT0iNDAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgdmlld0JveD0iMCAwIDEwIDEwIiBmaWxsPSJub25lIj4KPGV4dCBmb250LXNpemU9IjQiIGZpbGw9IiMyOEE3NDUiPuWBpeW6tzwvdGV4dD4KPC9zdmc+Cjwvc3ZnPgo=" alt="打药后图像">
-                                    <div class="ai-analysis-overlay">
-                                        <span class="pest-indicator low">虫害密度: 低</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="comparison-result">
-                            <div class="result-item">
-                                <span class="result-label">杂草控制有效率:</span>
-                                <span class="result-value success">杂草控制率 80%</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">杂草占比降低量:</span>
-                                <span class="result-value success">降低 40%</span>
-                            </div>
-                            <div class="result-item">
-                                <span class="result-label">打药效果:</span>
-                                <span class="result-value success">优秀</span>
-                            </div>
-                        </div>
+                    <!-- 底部提示 -->
+                    <div style="text-align: center; margin-top: 20px; color: #666; font-size: 12px;">
+                        <i class="fas fa-robot" style="color: #0aa06e; margin-right: 5px;"></i>
+                        没有更多了
                     </div>
+                </div>
 
-                    <!-- AI洞察报告 -->
-                    <div class="card ai-insights-section">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <i class="fas fa-lightbulb"></i>
-                                AI洞察报告
-                        </div>
-                            <span class="report-date">2024-01-16</span>
-                            </div>
-                        
-                        <div class="insights-content">
-                            <div class="insight-item">
-                                <div class="insight-header">
-                                    <i class="fas fa-check-circle insight-icon success"></i>
-                                    <h4>病虫害防治效果</h4>
-                            </div>
-                                <div class="insight-text">
-                                    通过AI图像识别技术，检测到本次打药作业对目标害虫的控制效果显著。虫害密度从农事前的85%下降至5%，防治效率达到94.1%，超出预期目标15%。
-                        </div>
-                                <div class="insight-recommendation">
-                                    <strong>AI建议:</strong> 当前用药配比和施药时间最优，建议在类似气候条件下采用相同方案。
-                            </div>
-                            </div>
-                            
-                            <div class="insight-item">
-                                <div class="insight-header">
-                                    <i class="fas fa-leaf insight-icon growth"></i>
-                                    <h4>作物生长状况</h4>
-                        </div>
-                                <div class="insight-text">
-                                    AI分析显示，作物叶片颜色由黄绿转为深绿，叶片厚度增加12%，整体长势良好。预测在未来7-10天内将进入快速生长期。
-                            </div>
-                                <div class="insight-recommendation">
-                                    <strong>AI建议:</strong> 适当增加水肥供应，关注天气变化，预防可能的病害复发。
-                            </div>
-                        </div>
-                            
-                            <div class="insight-item">
-                                <div class="insight-header">
-                                    <i class="fas fa-chart-area insight-icon efficiency"></i>
-                                    <h4>效率优化分析</h4>
-                    </div>
-                                <div class="insight-text">
-                                    相比传统方式，AI辅助农事作业节省农药使用量20%，作业时间缩短30%，总体成本降低25%。
-                                </div>
-                                <div class="insight-recommendation">
-                                    <strong>AI建议:</strong> 可将此经验模式推广至其他相似地块，形成标准化作业流程。
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- AI趋势分析 -->
-                    <div class="card ai-trends-section">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <i class="fas fa-chart-line"></i>
-                                AI服务效果趋势
-                            </div>
-                        </div>
-                        
-                        <div class="trends-chart">
-                            <div style="height: 150px; display: flex; align-items: center; justify-content: center; color: #666; background: #f8f9fa; border-radius: 8px;">
-                                <div style="text-align: center;">
-                                    <i class="fas fa-chart-area" style="font-size: 32px; margin-bottom: 10px; color: #0aa06e;"></i>
-                                    <div>AI效果提升趋势图</div>
-                                    <div style="font-size: 12px; margin-top: 5px; color: #0aa06e;">近30天平均提升25%</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="trend-metrics">
-                            <div class="metric-item">
-                                <span class="metric-label">识别准确率</span>
-                                <span class="metric-value">↗ 98.5%</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">处理速度</span>
-                                <span class="metric-value">↗ 2.3s/次</span>
-                            </div>
-                            <div class="metric-item">
-                                <span class="metric-label">成本节约</span>
-                                <span class="metric-value">↗ 30%</span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- 悬浮添加按钮 -->
+                <div class="fab">
+                    <i class="fas fa-plus"></i>
                 </div>
             </div>
         `
     },
     
     farmServiceRecord: {
-        title: '农事服务前后记录',
-        subtitle: '农事服务对比记录',
+        title: '新建农事方案',
+        subtitle: '基础信息',
         content: `
-            <div class="mobile-page farmServiceRecord-page">
+            <div class="mobile-page newFarmPlan-page">
                 <div class="mobile-header">
                     <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
-                    <h1>农事服务前后记录</h1>
+                    <h1>新建农事方案</h1>
+                    <div class="header-actions">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <i class="fas fa-bullseye"></i>
+                    </div>
                 </div>
+                
+                <!-- 进度指示器 -->
+                <div class="progress-indicator">
+                    <div class="progress-step active">
+                        <span class="step-number">1</span>
+                        <span class="step-text">基础信息</span>
+                    </div>
+                    <div class="progress-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="progress-step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">方案计划</span>
+                    </div>
+                </div>
+                
                 <div class="mobile-content">
-                    <!-- 服务信息卡片 -->
-                    <div class="service-info-card">
-                        <div class="service-header">
-                            <div class="service-tag spraying">打药</div>
-                            <div class="service-date">2025-08-13~2025-08-13</div>
+                    <div class="form-container">
+                        <!-- 方案名称 -->
+                        <div class="form-group">
+                            <label class="form-label required">方案名称</label>
+                            <input type="text" class="form-input" placeholder="请输入">
                         </div>
-                        <div class="service-title">打药测试1</div>
-                        <div class="service-details">
-                            <div class="detail-row">
-                                <span class="detail-label">基地/地块：</span>
-                                <span class="detail-value">大厅水培植物 | 一号分区 | 一号基地(水培区 | 一号地块)</span>
+                        
+                        <!-- 所在地域 -->
+                        <div class="form-group">
+                            <label class="form-label required">所在地域</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请选择区域">
+                                <i class="fas fa-chevron-down"></i>
                             </div>
-                            <div class="detail-row">
-                                <span class="detail-label">种植计划：</span>
+                        </div>
+                        
+                        <!-- 种植作物 -->
+                        <div class="form-group">
+                            <label class="form-label required">种植作物</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请选择">
+                                <button class="add-crop-btn">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- 作物品种 -->
+                        <div class="form-group">
+                            <label class="form-label required">作物品种</label>
+                            <input type="text" class="form-input" placeholder="请输入">
+                        </div>
+                        
+                        <!-- 种植周期 -->
+                        <div class="form-group">
+                            <label class="form-label required">种植周期</label>
+                            <div class="time-input-group">
+                                <input type="text" class="form-input" placeholder="开始时间">
+                                <span class="time-separator">至</span>
+                                <input type="text" class="form-input" placeholder="结束时间">
+                            </div>
+                        </div>
+                        
+                        <!-- 种植面积 -->
+                        <div class="form-group">
+                            <label class="form-label required">种植面积</label>
+                            <input type="text" class="form-input" placeholder="请输入">
+                        </div>
+                        
+                        <!-- 预计亩均产量 -->
+                        <div class="form-group">
+                            <label class="form-label required">预计亩均产量</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请输入">
+                                <span class="unit-text">kg</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 预计亩均成本 -->
+                        <div class="form-group">
+                            <label class="form-label required">预计亩均成本</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请输入">
+                                <span class="unit-text">元</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 预计亩均收入 -->
+                        <div class="form-group">
+                            <label class="form-label required">预计亩均收入</label>
+                            <div class="form-input-wrapper">
+                                <input type="text" class="form-input" placeholder="请输入">
+                                <span class="unit-text">元</span>
+                            </div>
+                        </div>
+                        
+                        <!-- 指导专家 -->
+                        <div class="form-group">
+                            <label class="form-label required">指导专家</label>
+                            <input type="text" class="form-input" placeholder="请输入">
+                        </div>
+                        
+                        <!-- 所属单位 -->
+                        <div class="form-group">
+                            <label class="form-label required">所属单位</label>
+                            <input type="text" class="form-input" placeholder="请输入">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 底部按钮 -->
+                <div class="mobile-footer">
+                    <button class="btn btn-next" onclick="loadPage('farmPlanStep2')">下一步</button>
+                </div>
+            </div>
+        `
+    },
+    
+    farmPlanStep2: {
+        title: '新建农事方案',
+        subtitle: '方案计划',
+        content: `
+            <div class="mobile-page newFarmPlan-page">
+                <div class="mobile-header">
+                    <button class="back-btn" onclick="goBack()"><i class="fas fa-arrow-left"></i></button>
+                    <h1>新建农事方案</h1>
+                    <div class="header-actions">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                </div>
+                
+                <!-- 进度指示器 -->
+                <div class="progress-indicator">
+                    <div class="progress-step completed">
+                        <span class="step-number">1</span>
+                        <span class="step-text">基础信息</span>
+                    </div>
+                    <div class="progress-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <div class="progress-step active">
+                        <span class="step-number">2</span>
+                        <span class="step-text">方案计划</span>
+                    </div>
+                </div>
+                
+                <div class="mobile-content">
+                    <!-- 农事方案计划标题 -->
+                    <div class="plan-section-header">
+                        <h3>农事方案计划</h3>
+                        <button class="add-plan-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- 方案计划卡片 -->
+                    <div class="plan-card">
+                        <div class="plan-card-header">
+                            <div class="plan-date">
+                                <i class="fas fa-clock"></i>
+                                <span>当年08月18日~当年08月20日</span>
+                            </div>
+                            <div class="plan-options">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </div>
+                        </div>
+                        <div class="plan-card-content">
+                            <div class="plan-detail-item">
+                                <span class="detail-label">农事类型:</span>
                                 <span class="detail-value">打药</span>
                             </div>
-                            <div class="detail-row">
-                                <span class="detail-label">负责人：</span>
-                                <span class="detail-value">王成龙</span>
+                            <div class="plan-detail-item">
+                                <span class="detail-label">活动名称:</span>
+                                <span class="detail-value">第一季度 | 打药作业活动</span>
                             </div>
-                            <div class="detail-row">
-                                <span class="detail-label">备注：</span>
-                                <span class="detail-value"></span>
+                            <div class="plan-detail-item">
+                                <span class="detail-label">作物:</span>
+                                <span class="detail-value">冬小麦</span>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- 农事照片对比 -->
-                    <div class="record-section">
-                        <div class="section-header">
-                            <i class="fas fa-camera"></i>
-                            <h3>农事照片</h3>
-                        </div>
-                        
-                        <!-- 服务前后对比 -->
-                        <div class="comparison-container">
-                            <div class="comparison-side">
-                                <div class="comparison-title">服务前</div>
-                                <div class="photo-grid">
-                                    <div class="photo-item icon-photo before">
-                                        <i class="fas fa-leaf photo-icon"></i>
-                                        <div class="photo-overlay">
-                                            <span class="photo-time">08-13 09:30</span>
-                                        </div>
-                                    </div>
-                                    <div class="photo-item icon-photo before">
-                                        <i class="fas fa-seedling photo-icon"></i>
-                                        <div class="photo-overlay">
-                                            <span class="photo-time">08-13 09:32</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="comparison-divider">
-                                <div class="divider-line"></div>
-                                <span class="vs-text">VS</span>
-                                <div class="divider-line"></div>
-                            </div>
-                            
-                            <div class="comparison-side">
-                                <div class="comparison-title">服务后</div>
-                                <div class="photo-grid">
-                                    <div class="photo-item icon-photo after">
-                                        <i class="fas fa-leaf photo-icon"></i>
-                                        <div class="photo-overlay">
-                                            <span class="photo-time">08-13 15:20</span>
-                                        </div>
-                                    </div>
-                                    <div class="photo-item icon-photo after">
-                                        <i class="fas fa-seedling photo-icon"></i>
-                                        <div class="photo-overlay">
-                                            <span class="photo-time">08-13 15:22</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 农事视频对比 -->
-                    <div class="record-section">
-                        <div class="section-header">
-                            <i class="fas fa-video"></i>
-                            <h3>上传农事视频</h3>
-                        </div>
-                        
-                        <div class="comparison-container">
-                            <div class="comparison-side">
-                                <div class="comparison-title">服务前</div>
-                                <div class="video-grid">
-                                    <div class="video-item">
-                                        <div class="video-thumbnail">
-                                            <i class="fas fa-play"></i>
-                                            <span class="video-duration">00:15</span>
-                                        </div>
-                                        <div class="video-time">08-13 09:28</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="comparison-divider">
-                                <div class="divider-line"></div>
-                                <span class="vs-text">VS</span>
-                                <div class="divider-line"></div>
-                            </div>
-                            
-                            <div class="comparison-side">
-                                <div class="comparison-title">服务后</div>
-                                <div class="video-grid">
-                                    <div class="video-item">
-                                        <div class="video-thumbnail">
-                                            <i class="fas fa-play"></i>
-                                            <span class="video-duration">00:12</span>
-                                        </div>
-                                        <div class="video-time">08-13 15:18</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- AI分析对比结果 -->
-                    <div class="record-section">
-                        <div class="section-header">
-                            <i class="fas fa-brain"></i>
-                            <h3>AI分析对比结果</h3>
-                        </div>
-                        
-                        <div class="ai-analysis-results">
-                            <div class="analysis-item">
-                                <div class="analysis-metric">
-                                    <span class="metric-label">病虫害密度变化</span>
-                                    <div class="metric-change">
-                                        <span class="before-value">85%</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                        <span class="after-value">5%</span>
-                                        <span class="improvement">↓ 94.1%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="analysis-item">
-                                <div class="analysis-metric">
-                                    <span class="metric-label">叶片健康度</span>
-                                    <div class="metric-change">
-                                        <span class="before-value">60%</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                        <span class="after-value">95%</span>
-                                        <span class="improvement">↗ 58.3%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="analysis-item">
-                                <div class="analysis-metric">
-                                    <span class="metric-label">作物生长状况</span>
-                                    <div class="metric-change">
-                                        <span class="before-value">一般</span>
-                                        <i class="fas fa-arrow-right"></i>
-                                        <span class="after-value">优秀</span>
-                                        <span class="improvement">显著提升</span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="overall-result">
-                                <div class="result-title">
-                                    <i class="fas fa-check-circle"></i>
-                                    整体服务效果评估
-                                </div>
-                                <div class="result-score">95分</div>
-                                <div class="result-description">
-                                    本次农事服务效果显著，AI分析显示各项指标均达到预期目标，建议继续保持当前服务方案。
-                                </div>
+                            <div class="plan-detail-item">
+                                <span class="detail-label">建议:</span>
+                                <span class="detail-value">打药作业</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
+                <!-- 底部按钮 -->
                 <div class="mobile-footer">
-                    <button class="btn btn-outline" onclick="shareRecord()">分享记录</button>
-                    <button class="btn" onclick="exportRecord()">导出报告</button>
+                    <div class="footer-buttons">
+                        <button class="btn btn-prev" onclick="loadPage('farmServiceRecord')">上一步</button>
+                        <button class="btn btn-complete">完成</button>
+                    </div>
                 </div>
             </div>
         `
