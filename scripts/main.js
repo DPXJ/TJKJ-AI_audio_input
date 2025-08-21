@@ -1073,18 +1073,30 @@ const pageData = {
                 </div>
                 
                 <div class="mobile-content">
+                    <!-- AI语音输入提示 -->
+                    <div class="ai-voice-tip">
+                        <div class="tip-content">
+                            <i class="fas fa-microphone-alt"></i>
+                            <span>点击下方AI按钮，语音输入表单信息</span>
+                        </div>
+                        <div class="tip-examples">
+                            <span class="example-title">示例：</span>
+                            <span class="example-text">"我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙" 或 "我要创建一个水仙花种植方案，方案名称是8月管理1号方案，所在区域是大厅水培植物基地，种植面积1亩，预计亩均产量500公斤，预计亩均成本2000元，预计亩均收入3000元，指导专家是张教授，所属单位是农业技术推广站"</span>
+                        </div>
+                    </div>
+                    
                     <div class="form-container">
                         <!-- 方案名称 -->
                         <div class="form-group">
                             <label class="form-label required">方案名称</label>
-                            <input type="text" class="form-input" placeholder="请输入">
+                            <input type="text" class="form-input" id="planName" placeholder="请输入">
                         </div>
                         
                         <!-- 所在地域 -->
                         <div class="form-group">
                             <label class="form-label required">所在地域</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请选择区域">
+                                <input type="text" class="form-input" id="location" placeholder="请选择区域">
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                         </div>
@@ -1093,7 +1105,7 @@ const pageData = {
                         <div class="form-group">
                             <label class="form-label required">种植作物</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请选择">
+                                <input type="text" class="form-input" id="cropType" placeholder="请选择">
                                 <button class="add-crop-btn">
                                     <i class="fas fa-plus"></i>
                                 </button>
@@ -1103,30 +1115,30 @@ const pageData = {
                         <!-- 作物品种 -->
                         <div class="form-group">
                             <label class="form-label required">作物品种</label>
-                            <input type="text" class="form-input" placeholder="请输入">
+                            <input type="text" class="form-input" id="cropVariety" placeholder="请输入">
                         </div>
                         
                         <!-- 种植周期 -->
                         <div class="form-group">
                             <label class="form-label required">种植周期</label>
                             <div class="time-input-group">
-                                <input type="text" class="form-input" placeholder="开始时间">
+                                <input type="text" class="form-input" id="startTime" placeholder="开始时间">
                                 <span class="time-separator">至</span>
-                                <input type="text" class="form-input" placeholder="结束时间">
+                                <input type="text" class="form-input" id="endTime" placeholder="结束时间">
                             </div>
                         </div>
                         
                         <!-- 种植面积 -->
                         <div class="form-group">
                             <label class="form-label required">种植面积</label>
-                            <input type="text" class="form-input" placeholder="请输入">
+                            <input type="text" class="form-input" id="plantingArea" placeholder="请输入">
                         </div>
                         
                         <!-- 预计亩均产量 -->
                         <div class="form-group">
                             <label class="form-label required">预计亩均产量</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请输入">
+                                <input type="text" class="form-input" id="expectedYield" placeholder="请输入">
                                 <span class="unit-text">kg</span>
                             </div>
                         </div>
@@ -1135,7 +1147,7 @@ const pageData = {
                         <div class="form-group">
                             <label class="form-label required">预计亩均成本</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请输入">
+                                <input type="text" class="form-input" id="expectedCost" placeholder="请输入">
                                 <span class="unit-text">元</span>
                             </div>
                         </div>
@@ -1144,7 +1156,7 @@ const pageData = {
                         <div class="form-group">
                             <label class="form-label required">预计亩均收入</label>
                             <div class="form-input-wrapper">
-                                <input type="text" class="form-input" placeholder="请输入">
+                                <input type="text" class="form-input" id="expectedIncome" placeholder="请输入">
                                 <span class="unit-text">元</span>
                             </div>
                         </div>
@@ -1152,20 +1164,115 @@ const pageData = {
                         <!-- 指导专家 -->
                         <div class="form-group">
                             <label class="form-label required">指导专家</label>
-                            <input type="text" class="form-input" placeholder="请输入">
+                            <input type="text" class="form-input" id="expert" placeholder="请输入">
                         </div>
                         
                         <!-- 所属单位 -->
                         <div class="form-group">
                             <label class="form-label required">所属单位</label>
-                            <input type="text" class="form-input" placeholder="请输入">
+                            <input type="text" class="form-input" id="organization" placeholder="请输入">
                         </div>
                     </div>
+                </div>
+                
+                <!-- AI语音输入按钮 -->
+                <div class="ai-voice-button" onclick="startVoiceInput()">
+                    <i class="fas fa-microphone-alt"></i>
+                    <span class="ai-text">AI</span>
                 </div>
                 
                 <!-- 底部按钮 -->
                 <div class="mobile-footer">
                     <button class="btn btn-next" onclick="loadPage('farmPlanStep2')">下一步</button>
+                </div>
+                
+                <!-- AI语音识别弹窗 -->
+                <div class="ai-voice-modal" id="aiVoiceModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>AI语音识别</h3>
+                            <button class="close-btn" onclick="closeVoiceModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="voice-status" id="voiceStatus">
+                                <div class="status-icon">
+                                    <i class="fas fa-microphone-alt"></i>
+                                </div>
+                                <div class="status-text">点击开始录音</div>
+                            </div>
+                            <div class="voice-recording" id="voiceRecording" style="display: none;">
+                                <div class="recording-animation">
+                                    <div class="wave-container">
+                                        <div class="wave"></div>
+                                        <div class="wave"></div>
+                                        <div class="wave"></div>
+                                    </div>
+                                </div>
+                                <div class="recording-text">正在录音，请说话...</div>
+                                <div class="recording-time" id="recordingTime">00:00</div>
+                                
+                                <!-- 实时回显文字 -->
+                                <div class="realtime-text-container">
+                                    <div class="realtime-text" id="realtimeText"></div>
+                                </div>
+                                
+                                <!-- 录音控制按钮 -->
+                                <div class="recording-controls">
+                                    <button class="btn btn-pause" id="pauseBtn" onclick="pauseRecording()">
+                                        <i class="fas fa-pause"></i>
+                                        <span>暂停</span>
+                                    </button>
+                                    <button class="btn btn-continue" id="continueBtn" onclick="continueRecording()" style="display: none;">
+                                        <i class="fas fa-play"></i>
+                                        <span>继续</span>
+                                    </button>
+                                    <button class="btn btn-finish" id="finishBtn" onclick="finishRecording()">
+                                        完成
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="voice-result" id="voiceResult" style="display: none;">
+                                <div class="result-text" id="resultText"></div>
+                                <div class="result-actions">
+                                    <button class="btn btn-secondary" onclick="reRecord()">重新录音</button>
+                                    <button class="btn btn-primary" onclick="confirmResult()">确认使用</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI智能解析过渡弹窗 -->
+                <div class="ai-processing-modal" id="aiProcessingModal">
+                    <div class="processing-content">
+                        <div class="modal-header">
+                            <h3>AI智能解析中</h3>
+                            <button class="close-btn" onclick="hideAIProcessing()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="processing-body">
+                            <ul class="timeline" id="processingTimeline">
+                                <li class="step"><span class="dot"></span><span class="label">语音转文字</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">意图理解</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">实体抽取</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">表单映射</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">完成</span></li>
+                            </ul>
+                            <div class="variables-card">
+                                <div class="vc-title"><i class="fas fa-list"></i> AI识别到的变量</div>
+                                <div class="variables-list" id="extractedVariables">
+                                    <!-- 变量结果将由JS填充 -->
+                                </div>
+                            </div>
+                            <div class="countdown-section">
+                                <div class="countdown-text">即将自动填充表单</div>
+                                <div class="countdown-timer" id="countdownTimer">3</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `
@@ -1201,10 +1308,22 @@ const pageData = {
                 </div>
                 
                 <div class="mobile-content">
+                    <!-- AI语音输入提示 -->
+                    <div class="ai-voice-tip">
+                        <div class="tip-content">
+                            <i class="fas fa-microphone-alt"></i>
+                            <span>点击下方AI按钮，语音添加农事计划</span>
+                        </div>
+                        <div class="tip-examples">
+                            <span class="example-title">示例：</span>
+                            <span class="example-text">"我要添加一个打药计划，时间是从8月18日到8月20日，农事类型是打药，活动名称是第一季度打药作业活动，作物是冬小麦，建议注意天气条件进行打药作业"</span>
+                        </div>
+                    </div>
+                    
                     <!-- 农事方案计划标题 -->
                     <div class="plan-section-header">
                         <h3>农事方案计划</h3>
-                        <button class="add-plan-btn">
+                        <button class="add-plan-btn" onclick="startVoiceInput()">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
@@ -1241,11 +1360,106 @@ const pageData = {
                     </div>
                 </div>
                 
+                <!-- AI语音输入按钮 -->
+                <div class="ai-voice-button" onclick="startVoiceInput()">
+                    <i class="fas fa-microphone-alt"></i>
+                    <span class="ai-text">AI</span>
+                </div>
+                
                 <!-- 底部按钮 -->
                 <div class="mobile-footer">
                     <div class="footer-buttons">
                         <button class="btn btn-prev" onclick="loadPage('farmServiceRecord')">上一步</button>
                         <button class="btn btn-complete">完成</button>
+                    </div>
+                </div>
+                
+                <!-- AI语音识别弹窗 -->
+                <div class="ai-voice-modal" id="aiVoiceModal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>AI语音识别</h3>
+                            <button class="close-btn" onclick="closeVoiceModal()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="voice-status" id="voiceStatus">
+                                <div class="status-icon">
+                                    <i class="fas fa-microphone-alt"></i>
+                                </div>
+                                <div class="status-text">点击开始录音</div>
+                            </div>
+                            <div class="voice-recording" id="voiceRecording" style="display: none;">
+                                <div class="recording-animation">
+                                    <div class="wave-container">
+                                        <div class="wave"></div>
+                                        <div class="wave"></div>
+                                        <div class="wave"></div>
+                                    </div>
+                                </div>
+                                <div class="recording-text">正在录音，请说话...</div>
+                                <div class="recording-time" id="recordingTime">00:00</div>
+                                
+                                <!-- 实时回显文字 -->
+                                <div class="realtime-text-container">
+                                    <div class="realtime-text" id="realtimeText"></div>
+                                </div>
+                                
+                                <!-- 录音控制按钮 -->
+                                <div class="recording-controls">
+                                    <button class="btn btn-pause" id="pauseBtn" onclick="pauseRecording()">
+                                        <i class="fas fa-pause"></i>
+                                        <span>暂停</span>
+                                    </button>
+                                    <button class="btn btn-continue" id="continueBtn" onclick="continueRecording()" style="display: none;">
+                                        <i class="fas fa-play"></i>
+                                        <span>继续</span>
+                                    </button>
+                                    <button class="btn btn-finish" id="finishBtn" onclick="finishRecording()">
+                                        完成
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="voice-result" id="voiceResult" style="display: none;">
+                                <div class="result-text" id="resultText"></div>
+                                <div class="result-actions">
+                                    <button class="btn btn-secondary" onclick="reRecord()">重新录音</button>
+                                    <button class="btn btn-primary" onclick="confirmResult()">确认使用</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI智能解析过渡弹窗 -->
+                <div class="ai-processing-modal" id="aiProcessingModal">
+                    <div class="processing-content">
+                        <div class="modal-header">
+                            <h3>AI智能解析中</h3>
+                            <button class="close-btn" onclick="hideAIProcessing()">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="processing-body">
+                            <ul class="timeline" id="processingTimeline">
+                                <li class="step"><span class="dot"></span><span class="label">语音转文字</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">意图理解</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">实体抽取</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">计划创建</span></li>
+                                <li class="step"><span class="dot"></span><span class="label">完成</span></li>
+                            </ul>
+                            <div class="variables-card">
+                                <div class="vc-title"><i class="fas fa-list"></i> AI识别到的变量</div>
+                                <div class="variables-list" id="extractedVariables">
+                                    <!-- 变量结果将由JS填充 -->
+                                </div>
+                            </div>
+                            <div class="countdown-section">
+                                <div class="countdown-text">即将自动创建农事计划</div>
+                                <div class="countdown-timer" id="countdownTimer">3</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2267,14 +2481,46 @@ let realtimeTextTimer = null;
 let currentText = '';
 let inactivityCheckTimer = null; // 30秒未输入检测
 let lastRealtimeUpdateTs = 0;
-let mockTexts = [
-    "我要为大厅水培植物基地",
-    "我要为大厅水培植物基地的水仙花",
-    "我要为大厅水培植物基地的水仙花安排打药活动",
-    "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点",
-    "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点",
-    "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙"
-];
+// 根据页面类型动态生成mockTexts
+function getMockTextsForCurrentPage() {
+    const currentPageElement = document.getElementById('phoneContent');
+    const isNewFarmPlan = currentPageElement && currentPageElement.innerHTML.includes('新建农事方案');
+    const isFarmPlanStep2 = currentPageElement && currentPageElement.innerHTML.includes('农事方案计划');
+    
+    if (isNewFarmPlan && !isFarmPlanStep2) {
+        // 新建农事方案第一步
+        return [
+            "我要创建一个水仙花种植方案",
+            "我要创建一个水仙花种植方案，方案名称是8月管理1号方案",
+            "我要创建一个水仙花种植方案，方案名称是8月管理1号方案，所在区域是大厅水培植物基地",
+            "我要创建一个水仙花种植方案，方案名称是8月管理1号方案，所在区域是大厅水培植物基地，种植面积1亩",
+            "我要创建一个水仙花种植方案，方案名称是8月管理1号方案，所在区域是大厅水培植物基地，种植面积1亩，预计亩均产量500公斤",
+            "我要创建一个水仙花种植方案，方案名称是8月管理1号方案，所在区域是大厅水培植物基地，种植面积1亩，预计亩均产量500公斤，预计亩均成本2000元，预计亩均收入3000元，指导专家是张教授，所属单位是农业技术推广站"
+        ];
+    } else if (isFarmPlanStep2) {
+        // 新建农事方案第二步
+        return [
+            "我要添加一个打药计划",
+            "我要添加一个打药计划，时间是从8月18日到8月20日",
+            "我要添加一个打药计划，时间是从8月18日到8月20日，农事类型是打药",
+            "我要添加一个打药计划，时间是从8月18日到8月20日，农事类型是打药，活动名称是第一季度打药作业活动",
+            "我要添加一个打药计划，时间是从8月18日到8月20日，农事类型是打药，活动名称是第一季度打药作业活动，作物是冬小麦",
+            "我要添加一个打药计划，时间是从8月18日到8月20日，农事类型是打药，活动名称是第一季度打药作业活动，作物是冬小麦，建议注意天气条件进行打药作业"
+        ];
+    } else {
+        // 添加农事活动页面
+        return [
+            "我要为大厅水培植物基地",
+            "我要为大厅水培植物基地的水仙花",
+            "我要为大厅水培植物基地的水仙花安排打药活动",
+            "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点",
+            "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点",
+            "我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙"
+        ];
+    }
+}
+
+let mockTexts = getMockTextsForCurrentPage();
 let textIndex = 0;
 
 // 初始化语音识别（模拟版本）
@@ -2284,6 +2530,10 @@ function initSpeechRecognition() {
 
 // 开始语音输入
 window.startVoiceInput = function() {
+    // 重新获取当前页面的mockTexts
+    mockTexts = getMockTextsForCurrentPage();
+    textIndex = 0; // 重置文本索引
+    
     const modal = document.getElementById('aiVoiceModal');
     if (modal) {
         modal.classList.add('show');
@@ -2359,7 +2609,24 @@ window.finishRecording = function() {
         stopRealtimeText();
     }
     const finalText = document.getElementById('realtimeText')?.textContent || '';
-    const transcript = finalText || '我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙';
+    // 根据当前页面类型提供不同的默认示例
+    const currentPageElement = document.getElementById('phoneContent');
+    const isNewFarmPlan = currentPageElement && currentPageElement.innerHTML.includes('新建农事方案');
+    const isFarmPlanStep2 = currentPageElement && currentPageElement.innerHTML.includes('农事方案计划');
+    
+    let defaultTranscript;
+    if (isNewFarmPlan && !isFarmPlanStep2) {
+        // 新建农事方案第一步示例
+        defaultTranscript = '我要创建一个水仙花种植方案，方案名称是8月管理1号方案，所在区域是大厅水培植物基地，种植面积1亩，预计亩均产量500公斤，预计亩均成本2000元，预计亩均收入3000元，指导专家是张教授，所属单位是农业技术推广站';
+    } else if (isFarmPlanStep2) {
+        // 新建农事方案第二步示例
+        defaultTranscript = '我要添加一个打药计划，时间是从8月18日到8月20日，农事类型是打药，活动名称是第一季度打药作业活动，作物是冬小麦，建议注意天气条件进行打药作业';
+    } else {
+        // 原有的添加农事活动示例
+        defaultTranscript = '我要为大厅水培植物基地的水仙花安排打药活动，时间是明天上午9点到11点，负责人是王成龙';
+    }
+    
+    const transcript = finalText || defaultTranscript;
     showResultState(transcript);
 };
 
@@ -2376,24 +2643,62 @@ function showAIProcessing(transcript) {
     timeline.forEach(s => s.classList.remove('active'));
     varList.innerHTML = '';
     
-    const parsed = parseVoiceToFormData(transcript);
+    // 检测当前页面类型
+    const currentPageElement = document.getElementById('phoneContent');
+    const isNewFarmPlan = currentPageElement && currentPageElement.innerHTML.includes('新建农事方案');
+    const isFarmPlanStep2 = currentPageElement && currentPageElement.innerHTML.includes('农事方案计划');
+    
+    let parsed, mapping;
+    if (isNewFarmPlan && !isFarmPlanStep2) {
+        // 新建农事方案第一步：基础信息
+        parsed = parseVoiceToFarmPlanData(transcript);
+        mapping = {
+            planName: '方案名称',
+            location: '所在地域',
+            cropType: '种植作物',
+            cropVariety: '作物品种',
+            startTime: '种植开始时间',
+            endTime: '种植结束时间',
+            plantingArea: '种植面积',
+            expectedYield: '预计亩均产量',
+            expectedCost: '预计亩均成本',
+            expectedIncome: '预计亩均收入',
+            expert: '指导专家',
+            organization: '所属单位'
+        };
+    } else if (isFarmPlanStep2) {
+        // 新建农事方案第二步：方案计划
+        parsed = parseVoiceToFarmPlanStep2Data(transcript);
+        mapping = {
+            planStartDate: '计划开始日期',
+            planEndDate: '计划结束日期',
+            farmActivityType: '农事类型',
+            activityName: '活动名称',
+            cropType: '作物',
+            suggestion: '建议'
+        };
+    } else {
+        // 原有的添加农事活动页面
+        parsed = parseVoiceToFormData(transcript);
+        mapping = {
+            plantingPlan: '种植计划',
+            basePlot: '基地地块',
+            crop: '作物',
+            activityType: '农事类型',
+            activityName: '活动名称',
+            startTime: '开始时间',
+            endTime: '结束时间',
+            personInCharge: '负责人',
+            remarks: '备注'
+        };
+    }
+    
     const steps = [
         () => timeline[0].classList.add('active'),
         () => timeline[1].classList.add('active'),
         () => {
             timeline[2].classList.add('active');
             // 渲染变量
-            const mapping = {
-                plantingPlan: '种植计划',
-                basePlot: '基地地块',
-                crop: '作物',
-                activityType: '农事类型',
-                activityName: '活动名称',
-                startTime: '开始时间',
-                endTime: '结束时间',
-                personInCharge: '负责人',
-                remarks: '备注'
-            };
             Object.keys(parsed).forEach(key => {
                 const value = parsed[key];
                 if (!value) return;
@@ -2408,9 +2713,15 @@ function showAIProcessing(transcript) {
             timeline[4].classList.add('active');
             // 开始3秒倒计时
             startCountdown(() => {
-                parseAndFillForm(transcript);
+                if (isNewFarmPlan && !isFarmPlanStep2) {
+                    fillFarmPlanForm(parsed);
+                } else if (isFarmPlanStep2) {
+                    createNewFarmPlan(parsed);
+                } else {
+                    parseAndFillForm(transcript);
+                }
                 hideAIProcessing();
-                showToast('表单已自动填充完成！');
+                showToast(isFarmPlanStep2 ? '农事计划已创建完成！' : '表单已自动填充完成！');
             });
         }
     ];
@@ -2624,6 +2935,399 @@ function parseVoiceToFormData(transcript) {
     }
     
     return data;
+}
+
+// 解析语音到农事方案基础信息数据
+function parseVoiceToFarmPlanData(transcript) {
+    const data = {};
+    
+    // 智能检测：如果语音内容明显是农事活动相关，尝试转换为方案信息
+    if (transcript.includes('安排') && transcript.includes('活动')) {
+        // 从农事活动语音中提取方案信息
+        const cropMatch = transcript.match(/(水仙花|小麦|玉米|水稻|大豆|冬小麦|春小麦|花卉|番茄|黄瓜|白菜|萝卜)/);
+        if (cropMatch) {
+            data.cropType = cropMatch[0];
+            data.planName = `${cropMatch[0]}种植方案`;
+        }
+        
+        // 提取基地信息作为所在地域
+        if (transcript.includes('大厅水培植物基地')) {
+            data.location = '大厅水培植物基地';
+        }
+        
+        // 提取时间信息
+        const timeMatch = transcript.match(/(明天|后天|下周|下个月|本月)?\s*(上午|下午|晚上)?\s*(\d{1,2})[点时:：](\d{0,2})?\s*(到|至)\s*(\d{1,2})[点时:：](\d{0,2})?/);
+        if (timeMatch) {
+            const startHour = timeMatch[3];
+            const startMinute = timeMatch[4] || '00';
+            const endHour = timeMatch[6];
+            const endMinute = timeMatch[7] || '00';
+            
+            let startTime = `${startHour.padStart(2, '0')}:${startMinute}`;
+            let endTime = `${endHour.padStart(2, '0')}:${endMinute}`;
+            
+            if (timeMatch[2] === '下午' || timeMatch[2] === '晚上') {
+                startTime = `${parseInt(startHour) + 12}:${startMinute}`;
+                endTime = `${parseInt(endHour) + 12}:${endMinute}`;
+            }
+            
+            data.startTime = startTime;
+            data.endTime = endTime;
+        }
+        
+        // 提取负责人信息
+        const personMatch = transcript.match(/(负责人|负责人是|负责人为)([^，,。!！\s]*)/);
+        if (personMatch) {
+            data.expert = personMatch[2];
+        }
+        
+        // 设置默认值
+        if (!data.plantingArea) data.plantingArea = '1亩';
+        if (!data.expectedYield) data.expectedYield = '500';
+        if (!data.expectedCost) data.expectedCost = '2000';
+        if (!data.expectedIncome) data.expectedIncome = '3000';
+        if (!data.cropVariety) data.cropVariety = '1号';
+        if (!data.organization) data.organization = '农业技术推广站';
+        
+        return data;
+    }
+    
+    // 原有的方案信息解析逻辑
+    // 解析方案名称 - 更宽泛的匹配
+    const planNameMatch = transcript.match(/(方案名称是|叫做|命名为|创建|建立|制定)([^，,。!！]*[方案计划])/);
+    if (planNameMatch) {
+        data.planName = planNameMatch[2].trim();
+    } else if (transcript.includes('方案')) {
+        // 从语音中提取作物名称来生成方案名称
+        const cropMatch = transcript.match(/(水仙花|小麦|玉米|水稻|大豆|冬小麦|春小麦|花卉)/);
+        if (cropMatch) {
+            data.planName = `${cropMatch[0]}种植方案`;
+        } else {
+            data.planName = '农事种植方案';
+        }
+    }
+    
+    // 解析所在地域 - 更灵活的匹配
+    const locationMatch = transcript.match(/(所在地域|地区|区域|地方|位置)[是在为：:]?\s*([^，,。!！\s]*[省市县区乡镇村])/);
+    if (locationMatch) {
+        data.location = locationMatch[2];
+    } else {
+        // 尝试匹配地名模式
+        const placeMatch = transcript.match(/([^，,。!！\s]*[省市县区乡镇村])/);
+        if (placeMatch) {
+            data.location = placeMatch[0];
+        } else if (transcript.includes('大厅') || transcript.includes('基地')) {
+            data.location = '大厅水培植物基地';
+        }
+    }
+    
+    // 解析种植作物 - 扩展匹配范围
+    const cropMatch = transcript.match(/(水仙花|小麦|玉米|水稻|大豆|冬小麦|春小麦|花卉|番茄|黄瓜|白菜|萝卜)/);
+    if (cropMatch) {
+        data.cropType = cropMatch[0];
+    }
+    
+    // 解析作物品种 - 更灵活的数字匹配
+    const varietyMatch = transcript.match(/(品种是|品种为|品种)([^，,。!！\s]*[号])/);
+    if (varietyMatch) {
+        data.cropVariety = varietyMatch[2];
+    } else {
+        // 匹配数字+号的模式
+        const numberMatch = transcript.match(/([0-9一二三四五六七八九十]+)[号]/);
+        if (numberMatch) {
+            data.cropVariety = numberMatch[0];
+        }
+    }
+    
+    // 解析种植面积 - 支持多种表达方式
+    const areaMatch = transcript.match(/([0-9一二三四五六七八九十]+)\s*(亩|平方米|公顷)/);
+    if (areaMatch) {
+        let area = areaMatch[1];
+        // 转换中文数字
+        const chineseNumbers = {'一': '1', '二': '2', '三': '3', '四': '4', '五': '5', '六': '6', '七': '7', '八': '8', '九': '9', '十': '10'};
+        if (chineseNumbers[area]) {
+            area = chineseNumbers[area];
+        }
+        data.plantingArea = area + areaMatch[2];
+    }
+    
+    // 解析预计亩均产量 - 更全面的单位支持
+    const yieldMatch = transcript.match(/(产量|亩产|收成)[是为：:]?\s*([0-9]+)\s*(公斤|千克|kg|斤|吨)/);
+    if (yieldMatch) {
+        data.expectedYield = yieldMatch[2];
+    } else {
+        // 直接匹配数字+重量单位
+        const directYieldMatch = transcript.match(/([0-9]+)\s*(公斤|千克|kg)/);
+        if (directYieldMatch) {
+            data.expectedYield = directYieldMatch[1];
+        }
+    }
+    
+    // 解析预计亩均成本 - 支持多种表达
+    const costMatch = transcript.match(/(成本|投入|费用)[是为：:]?\s*([0-9]+)\s*元/);
+    if (costMatch) {
+        data.expectedCost = costMatch[2];
+    } else {
+        // 匹配"X元成本"的模式
+        const reverseCostMatch = transcript.match(/([0-9]+)\s*元\s*(成本|投入|费用)/);
+        if (reverseCostMatch) {
+            data.expectedCost = reverseCostMatch[1];
+        }
+    }
+    
+    // 解析预计亩均收入 - 支持多种表达
+    const incomeMatch = transcript.match(/(收入|收益|利润)[是为：:]?\s*([0-9]+)\s*元/);
+    if (incomeMatch) {
+        data.expectedIncome = incomeMatch[2];
+    } else {
+        // 匹配"X元收入"的模式
+        const reverseIncomeMatch = transcript.match(/([0-9]+)\s*元\s*(收入|收益|利润)/);
+        if (reverseIncomeMatch) {
+            data.expectedIncome = reverseIncomeMatch[1];
+        }
+    }
+    
+    // 解析指导专家 - 扩展姓名匹配
+    const expertMatch = transcript.match(/(指导专家|专家|负责人)[是为：:]?\s*([^，,。!！\s]*[授师长生员]|[王李张刘陈杨赵黄周吴徐孙胡朱高林何郭马罗梁][^，,。!！\s]*)/);
+    if (expertMatch) {
+        data.expert = expertMatch[2];
+    }
+    
+    // 解析所属单位 - 扩展机构匹配
+    const orgMatch = transcript.match(/(所属单位|单位|机构|组织)[是为：:]?\s*([^，,。!！\s]*[站所院校司厂社区村委会])/);
+    if (orgMatch) {
+        data.organization = orgMatch[2];
+    } else {
+        // 匹配常见机构后缀
+        const institutionMatch = transcript.match(/([^，,。!！\s]*[站所院校司厂社区村委会])/);
+        if (institutionMatch) {
+            data.organization = institutionMatch[0];
+        }
+    }
+    
+    // 解析种植周期 - 支持多种日期格式
+    const timeRangeMatch = transcript.match(/(\d{1,2}月\d{1,2}日?)[到至~](\d{1,2}月\d{1,2}日?)/);
+    if (timeRangeMatch) {
+        data.startTime = timeRangeMatch[1];
+        data.endTime = timeRangeMatch[2];
+    } else {
+        // 匹配年份+月日的格式
+        const yearTimeMatch = transcript.match(/(20\d{2}年)?(\d{1,2}月\d{1,2}日?)[到至~](20\d{2}年)?(\d{1,2}月\d{1,2}日?)/);
+        if (yearTimeMatch) {
+            data.startTime = yearTimeMatch[2];
+            data.endTime = yearTimeMatch[4];
+        }
+    }
+    
+    return data;
+}
+
+// 解析语音到农事方案计划数据
+function parseVoiceToFarmPlanStep2Data(transcript) {
+    const data = {};
+    
+    // 解析日期范围 - 支持更多格式
+    const dateRangeMatch = transcript.match(/(\d{1,2}月\d{1,2}日?)[到至~](\d{1,2}月\d{1,2}日?)/);
+    if (dateRangeMatch) {
+        data.planStartDate = '当年' + dateRangeMatch[1];
+        data.planEndDate = '当年' + dateRangeMatch[2];
+    } else {
+        // 匹配相对时间表达
+        const relativeTimeMatch = transcript.match(/(明天|后天|下周|下个月|本月)/);
+        if (relativeTimeMatch) {
+            const today = new Date();
+            let startDate, endDate;
+            
+            switch(relativeTimeMatch[1]) {
+                case '明天':
+                    startDate = new Date(today.getTime() + 24 * 60 * 60 * 1000);
+                    endDate = startDate;
+                    break;
+                case '后天':
+                    startDate = new Date(today.getTime() + 48 * 60 * 60 * 1000);
+                    endDate = startDate;
+                    break;
+                default:
+                    startDate = today;
+                    endDate = today;
+            }
+            
+            const formatDate = (date) => `${date.getMonth() + 1}月${date.getDate()}日`;
+            data.planStartDate = '当年' + formatDate(startDate);
+            data.planEndDate = '当年' + formatDate(endDate);
+        }
+    }
+    
+    // 解析农事类型 - 扩展类型识别
+    const activityTypeMatch = transcript.match(/(打药|施肥|浇水|除草|播种|收获|修剪|松土|灌溉|翻地|间苗|移栽|嫁接)/);
+    if (activityTypeMatch) {
+        data.farmActivityType = activityTypeMatch[0];
+    } else {
+        // 通过动作词推断农事类型
+        if (transcript.includes('安排') && transcript.includes('活动')) {
+            const actionMatch = transcript.match(/(安排|进行|执行)([^，,。!！]*)(活动|作业|工作)/);
+            if (actionMatch) {
+                const action = actionMatch[2];
+                if (action.includes('药')) data.farmActivityType = '打药';
+                else if (action.includes('肥')) data.farmActivityType = '施肥';
+                else if (action.includes('水')) data.farmActivityType = '浇水';
+                else if (action.includes('草')) data.farmActivityType = '除草';
+            }
+        }
+    }
+    
+    // 解析活动名称 - 更智能的生成
+    const activityNameMatch = transcript.match(/(活动名称|名称)[是为：:]?\s*([^，,。!！]*)/);
+    if (activityNameMatch && activityNameMatch[2].trim()) {
+        data.activityName = activityNameMatch[2].trim();
+    } else if (data.farmActivityType) {
+        // 根据时间和类型智能生成名称
+        const seasonMap = {
+            '春': ['3月', '4月', '5月'],
+            '夏': ['6月', '7月', '8月'],
+            '秋': ['9月', '10月', '11月'],
+            '冬': ['12月', '1月', '2月']
+        };
+        
+        let season = '第一季度';
+        const currentMonth = new Date().getMonth() + 1;
+        for (const [seasonName, months] of Object.entries(seasonMap)) {
+            if (months.some(m => m.includes(currentMonth.toString()))) {
+                season = seasonName + '季';
+                break;
+            }
+        }
+        
+        data.activityName = `${season} | ${data.farmActivityType}作业活动`;
+    } else {
+        data.activityName = '农事管理活动';
+    }
+    
+    // 解析作物 - 扩展作物识别
+    const cropMatch = transcript.match(/(作物|种植)[是为：:]?\s*([^，,。!！\s]*[麦花稻豆菜瓜果])/);
+    if (cropMatch) {
+        data.cropType = cropMatch[2];
+    } else {
+        // 直接匹配作物名称
+        const directCropMatch = transcript.match(/(水仙花|小麦|玉米|水稻|大豆|冬小麦|春小麦|花卉|番茄|黄瓜|白菜|萝卜)/);
+        if (directCropMatch) {
+            data.cropType = directCropMatch[0];
+        }
+    }
+    
+    // 解析建议 - 更智能的建议生成
+    const suggestionMatch = transcript.match(/(建议|推荐|提示)[是为进行：:]?\s*([^，,。!！]*)/);
+    if (suggestionMatch && suggestionMatch[2].trim()) {
+        data.suggestion = suggestionMatch[2].trim();
+    } else if (data.farmActivityType) {
+        // 根据农事类型生成具体建议
+        const suggestionMap = {
+            '打药': '注意天气条件，选择无风晴天进行打药作业',
+            '施肥': '根据土壤肥力检测结果，合理配比肥料用量',
+            '浇水': '根据土壤湿度和天气情况，适量浇水',
+            '除草': '人工除草结合机械除草，保护作物根系',
+            '播种': '选择优质种子，注意播种深度和密度',
+            '收获': '选择适宜天气，及时收获确保品质'
+        };
+        data.suggestion = suggestionMap[data.farmActivityType] || `${data.farmActivityType}作业`;
+    } else {
+        data.suggestion = '按标准流程执行';
+    }
+    
+    return data;
+}
+
+// 填充农事方案表单
+function fillFarmPlanForm(data) {
+    const fieldMapping = {
+        planName: 'planName',
+        location: 'location',
+        cropType: 'cropType',
+        cropVariety: 'cropVariety',
+        startTime: 'startTime',
+        endTime: 'endTime',
+        plantingArea: 'plantingArea',
+        expectedYield: 'expectedYield',
+        expectedCost: 'expectedCost',
+        expectedIncome: 'expectedIncome',
+        expert: 'expert',
+        organization: 'organization'
+    };
+    
+    Object.keys(fieldMapping).forEach(key => {
+        const value = data[key];
+        const fieldId = fieldMapping[key];
+        if (value && fieldId) {
+            const element = document.getElementById(fieldId);
+            if (element) {
+                element.value = value;
+                element.classList.add('ai-filled');
+                // 移除动画类
+                setTimeout(() => element.classList.remove('ai-filled'), 500);
+            }
+        }
+    });
+}
+
+// 创建新的农事计划
+function createNewFarmPlan(data) {
+    // 这里可以实现创建新计划卡片的逻辑
+    console.log('创建新的农事计划:', data);
+    
+    // 模拟添加新计划卡片到页面
+    const planSection = document.querySelector('.mobile-content');
+    if (planSection && data.farmActivityType) {
+        const newPlanCard = document.createElement('div');
+        newPlanCard.className = 'plan-card';
+        newPlanCard.innerHTML = `
+            <div class="plan-card-header">
+                <div class="plan-date">
+                    <i class="fas fa-clock"></i>
+                    <span>${data.planStartDate || '当年08月18日'}~${data.planEndDate || '当年08月20日'}</span>
+                </div>
+                <div class="plan-options">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div>
+            <div class="plan-card-content">
+                <div class="plan-detail-item">
+                    <span class="detail-label">农事类型:</span>
+                    <span class="detail-value">${data.farmActivityType || '打药'}</span>
+                </div>
+                <div class="plan-detail-item">
+                    <span class="detail-label">活动名称:</span>
+                    <span class="detail-value">${data.activityName || '新增农事活动'}</span>
+                </div>
+                <div class="plan-detail-item">
+                    <span class="detail-label">作物:</span>
+                    <span class="detail-value">${data.cropType || '冬小麦'}</span>
+                </div>
+                <div class="plan-detail-item">
+                    <span class="detail-label">建议:</span>
+                    <span class="detail-value">${data.suggestion || '按计划执行'}</span>
+                </div>
+            </div>
+        `;
+        
+        // 添加动画效果
+        newPlanCard.style.opacity = '0';
+        newPlanCard.style.transform = 'translateY(20px)';
+        
+        // 插入到现有计划卡片后面
+        const existingCard = planSection.querySelector('.plan-card');
+        if (existingCard) {
+            existingCard.parentNode.insertBefore(newPlanCard, existingCard.nextSibling);
+        } else {
+            planSection.appendChild(newPlanCard);
+        }
+        
+        // 显示动画
+        setTimeout(() => {
+            newPlanCard.style.transition = 'all 0.3s ease';
+            newPlanCard.style.opacity = '1';
+            newPlanCard.style.transform = 'translateY(0)';
+        }, 100);
+    }
 }
 
 // 页面加载完成后初始化语音识别

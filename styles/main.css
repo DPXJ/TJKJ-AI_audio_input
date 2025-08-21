@@ -2028,6 +2028,7 @@ body {
     background: #f8f9fa;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    padding-bottom: 100px; /* 为AI语音按钮留出空间 */
 }
 
 .newFarmPlan-page .mobile-content::-webkit-scrollbar {
