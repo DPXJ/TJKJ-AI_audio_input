@@ -608,13 +608,7 @@ const pageData = {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="voice-status" id="voiceStatus">
-                                <div class="status-icon">
-                                    <i class="fas fa-microphone-alt"></i>
-                                </div>
-                                <div class="status-text">点击开始录音</div>
-                            </div>
-                            <div class="voice-recording" id="voiceRecording" style="display: none;">
+                            <div class="voice-recording" id="voiceRecording">
                                 <div class="recording-animation">
                                     <div class="wave-container">
                                         <div class="wave"></div>
@@ -1196,13 +1190,7 @@ const pageData = {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="voice-status" id="voiceStatus">
-                                <div class="status-icon">
-                                    <i class="fas fa-microphone-alt"></i>
-                                </div>
-                                <div class="status-text">点击开始录音</div>
-                            </div>
-                            <div class="voice-recording" id="voiceRecording" style="display: none;">
+                            <div class="voice-recording" id="voiceRecording">
                                 <div class="recording-animation">
                                     <div class="wave-container">
                                         <div class="wave"></div>
@@ -1384,13 +1372,7 @@ const pageData = {
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="voice-status" id="voiceStatus">
-                                <div class="status-icon">
-                                    <i class="fas fa-microphone-alt"></i>
-                                </div>
-                                <div class="status-text">点击开始录音</div>
-                            </div>
-                            <div class="voice-recording" id="voiceRecording" style="display: none;">
+                            <div class="voice-recording" id="voiceRecording">
                                 <div class="recording-animation">
                                     <div class="wave-container">
                                         <div class="wave"></div>
@@ -2530,6 +2512,7 @@ function initSpeechRecognition() {
 
 // 开始语音输入
 window.startVoiceInput = function() {
+    console.log('开始语音输入 - 直接开始录音');
     // 重新获取当前页面的mockTexts
     mockTexts = getMockTextsForCurrentPage();
     textIndex = 0; // 重置文本索引
@@ -2538,9 +2521,10 @@ window.startVoiceInput = function() {
     if (modal) {
         modal.classList.add('show');
         initSpeechRecognition();
-        // 确保初始状态正确显示
+        // 直接开始录音，跳过"点击开始录音"步骤
         setTimeout(() => {
-            showInitialState();
+            console.log('直接开始录音');
+            startRecording();
         }, 100);
     }
 };
@@ -2572,19 +2556,19 @@ window.startRecording = function() {
     startRealtimeText();
     startInactivityTimer();
     lastRealtimeUpdateTs = Date.now();
+    console.log('显示录音状态');
     showRecordingState();
 };
 
 // 重新录音（模拟版本）
 window.reRecord = function() {
-    showInitialState();
     // 清理状态
     isRecording = false;
     isPaused = false;
     stopRecordingTimer();
     stopRealtimeText();
     stopInactivityTimer();
-    // 模拟重新录音
+    // 直接重新开始录音
     setTimeout(() => {
         startRecording();
     }, 500);
@@ -2759,43 +2743,34 @@ function startCountdown(callback) {
     }, 1000);
 }
 
-// 显示初始状态
+// 显示初始状态（已废弃，直接开始录音）
 function showInitialState() {
-    const statusElement = document.getElementById('voiceStatus');
-    const recordingElement = document.getElementById('voiceRecording');
-    const resultElement = document.getElementById('voiceResult');
-    
-    if (statusElement) statusElement.style.display = 'block';
-    if (recordingElement) recordingElement.style.display = 'none';
-    if (resultElement) resultElement.style.display = 'none';
-    
-    // 添加点击事件
-    if (statusElement) {
-        statusElement.onclick = function() {
-            startRecording();
-        };
-    }
+    // 不再需要初始状态，直接开始录音
+    startRecording();
 }
 
 // 显示录音状态
 function showRecordingState() {
-    const statusElement = document.getElementById('voiceStatus');
+    console.log('showRecordingState 被调用');
     const recordingElement = document.getElementById('voiceRecording');
     const resultElement = document.getElementById('voiceResult');
     
-    if (statusElement) statusElement.style.display = 'none';
-    if (recordingElement) recordingElement.style.display = 'block';
+    console.log('recordingElement:', recordingElement);
+    console.log('resultElement:', resultElement);
+    
+    if (recordingElement) {
+        recordingElement.style.display = 'block';
+        console.log('设置录音状态为显示');
+    }
     if (resultElement) resultElement.style.display = 'none';
 }
 
 // 显示结果状态
 function showResultState(transcript) {
-    const statusElement = document.getElementById('voiceStatus');
     const recordingElement = document.getElementById('voiceRecording');
     const resultElement = document.getElementById('voiceResult');
     const resultTextElement = document.getElementById('resultText');
     
-    if (statusElement) statusElement.style.display = 'none';
     if (recordingElement) recordingElement.style.display = 'none';
     if (resultElement) resultElement.style.display = 'block';
     
@@ -2821,7 +2796,10 @@ function showErrorState(error) {
     }
     
     showToast(errorMessage);
-    showInitialState();
+    // 错误后直接重新开始录音
+    setTimeout(() => {
+        startRecording();
+    }, 1000);
 }
 
 // 开始录音计时器
@@ -3415,7 +3393,10 @@ function startInactivityTimer() {
                 // 有部分内容，仍提示停止
                 showToast('长时间未录入，已停止录入');
             }
-            showInitialState();
+            // 超时后直接重新开始录音
+            setTimeout(() => {
+                startRecording();
+            }, 2000);
         }
     }, 1000);
 }
