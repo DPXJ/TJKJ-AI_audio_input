@@ -33,6 +33,10 @@
 
 ## 使用方法
 
+### 🌐 在线访问
+项目已部署到GitHub Pages，您可以直接访问：
+- **在线演示地址**：https://[您的GitHub用户名].github.io/[仓库名]/
+
 ### 1. 直接打开
 双击 `index.html` 文件即可在浏览器中打开原型演示系统。
 
@@ -51,6 +55,22 @@ php -S localhost:8000
 ```
 
 然后在浏览器中访问 `http://localhost:8000`
+
+## 🚀 部署到GitHub Pages
+
+### 自动部署
+项目已配置GitHub Actions自动部署，当您推送代码到main分支时，会自动部署到GitHub Pages。
+
+### 手动部署步骤
+1. 在GitHub仓库设置中启用GitHub Pages
+2. 选择"GitHub Actions"作为部署源
+3. 推送代码到main分支
+4. 等待部署完成
+
+### 部署配置
+- 部署分支：`main` 或 `master`
+- 部署目录：根目录
+- 自动触发：推送代码时自动部署
 
 ## 功能导航
 
